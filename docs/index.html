@@ -31,23 +31,23 @@
 </head>
 <body>
   <h1>💻 Monitor Prezzi Componenti PC</h1>
-  <div class="subtitle">Ultimo aggiornamento: 08/08/2026 16:17 UTC</div>
+  <div class="subtitle">Ultimo aggiornamento: 08/08/2026 16:21 UTC</div>
   
 <div class="card">
   <h2>AMD Ryzen 7 7800X3D</h2>
-  <div class="no-data">Nessun dato ancora</div>
+  <div class="price-now">112.90 €</div><div class="price-meta">fonte: amazon · 2026-08-08 16:20</div>
   <canvas id="chart_ryzen7_7800x3d"></canvas>
 </div>
 
 
 <div class="card">
   <h2>AMD Radeon RX 9070</h2>
-  <div class="no-data">Nessun dato ancora</div>
+  <div class="price-now">112.90 €</div><div class="price-meta">fonte: amazon · 2026-08-08 16:20</div>
   <canvas id="chart_rx_9070"></canvas>
 </div>
 
   <script>
-    const chartData = {"ryzen7_7800x3d": {"labels": [], "prices": []}, "rx_9070": {"labels": [], "prices": []}};
+    const chartData = {"ryzen7_7800x3d": {"labels": ["2026-08-08"], "prices": [112.9]}, "rx_9070": {"labels": ["2026-08-08"], "prices": [112.9]}};
     Object.entries(chartData).forEach(([id, d]) => {
       const ctx = document.getElementById('chart_' + id);
       if (!ctx) return;

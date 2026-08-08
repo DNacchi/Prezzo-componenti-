@@ -1,10 +1,22 @@
 {
   "ryzen7_7800x3d": {
     "nome": "AMD Ryzen 7 7800X3D",
-    "prezzi": []
+    "prezzi": [
+      {
+        "data": "2026-08-08T16:20:59.936268+00:00",
+        "prezzo": 112.9,
+        "fonte": "amazon"
+      }
+    ]
   },
   "rx_9070": {
     "nome": "AMD Radeon RX 9070",
-    "prezzi": []
+    "prezzi": [
+      {
+        "data": "2026-08-08T16:20:59.936268+00:00",
+        "prezzo": 112.9,
+        "fonte": "amazon"
+      }
+    ]
   }
 }
