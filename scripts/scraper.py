@@ -168,20 +168,37 @@ def scrape_ebay(url, parole_chiave, prezzo_min):
 
 def scrape_bpm_power(url, parole_chiave, prezzo_min):
     """
-    BPM-power carica i prodotti via JavaScript. Prova prima con selettori
-    CSS specifici; se non trova nulla, usa un fallback che cerca pattern
-    di prezzo in tutto il testo della pagina renderizzata.
+    BPM-power carica i prodotti via JavaScript. Prova a chiudere il banner
+    cookie (che spesso blocca il caricamento contenuti), poi selettori CSS
+    specifici, poi fallback su tutto il testo della pagina.
     """
     page = _get_playwright_page()
     try:
         page.goto(url, wait_until="networkidle", timeout=30000)
-        page.wait_for_timeout(1500)
+
+        for testo_bottone in ["Accetta tutti", "Accetta", "Accept all", "Accetto"]:
+            try:
+                bottone = page.get_by_text(testo_bottone, exact=False).first
+                if bottone.is_visible(timeout=2000):
+                    bottone.click(timeout=2000)
+                    print(f"  [bpm_power debug] cliccato banner cookie: '{testo_bottone}'")
+                    page.wait_for_timeout(1000)
+                    break
+            except Exception:
+                continue
+
+        page.wait_for_load_state("networkidle", timeout=15000)
+        page.wait_for_timeout(2000)
     except Exception as e:
         print(f"  [bpm_power debug] errore caricamento pagina: {e}")
         return None
 
     html = page.content()
     soup = BeautifulSoup(html, "html.parser")
+
+    testo_pagina = soup.get_text(" ", strip=True)
+    print(f"  [bpm_power debug] lunghezza testo pagina: {len(testo_pagina)} caratteri")
+    print(f"  [bpm_power debug] anteprima: {testo_pagina[:200]}")
 
     prices = []
     candidati = soup.select(
