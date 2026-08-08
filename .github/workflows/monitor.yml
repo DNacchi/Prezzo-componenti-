@@ -1,4 +1,3 @@
-
 name: Monitor Prezzi PC
 
 on:
@@ -30,8 +29,14 @@ jobs:
       - name: Installa dipendenze
         run: pip install -r requirements.txt
 
+      - name: Installa browser Playwright
+        run: playwright install --with-deps chromium
+
       - name: Esegui scraping prezzi
         run: python scripts/scraper.py
+
+      - name: Controlla compatibilita' componenti
+        run: python scripts/check_compatibility.py
 
       - name: Invia notifiche Telegram
         env:
@@ -56,8 +61,8 @@ jobs:
           if git push origin HEAD:main; then
             echo "Push riuscito"
           else
-            echo "Push fallito: il remoto e' stato aggiornato nel frattempo da un'altra esecuzione."
-            echo "Scarto questo ciclo (i dati verranno aggiornati al prossimo giro tra 30 minuti)."
+            echo "Push fallito: il remoto e' stato aggiornato nel frattempo."
+            echo "Scarto questo ciclo (si aggiorna al prossimo giro)."
             git reset --hard origin/main
           fi
 
