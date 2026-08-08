@@ -4,6 +4,7 @@
       "id": "ryzen7_7800x3d",
       "nome": "AMD Ryzen 7 7800X3D",
       "soglia_prezzo": 350.0,
+      "parole_chiave": ["7800x3d"],
       "fonti": {
         "trovaprezzi": "https://www.trovaprezzi.it/cerca.aspx?libera=AMD+Ryzen+7+7800X3D",
         "ebay": "https://www.ebay.it/sch/i.html?_nkw=AMD+Ryzen+7+7800X3D",
@@ -14,6 +15,7 @@
       "id": "rx_9070",
       "nome": "AMD Radeon RX 9070",
       "soglia_prezzo": 600.0,
+      "parole_chiave": ["9070"],
       "fonti": {
         "trovaprezzi": "https://www.trovaprezzi.it/cerca.aspx?libera=Radeon+RX+9070",
         "ebay": "https://www.ebay.it/sch/i.html?_nkw=AMD+Radeon+RX+9070",
