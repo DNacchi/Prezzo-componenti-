@@ -1,9 +1,13 @@
-
 """
-Scraper prezzi componenti PC.
+Scraper prezzi componenti PC - versione multi-fonte.
 
 Ogni funzione 'scrape_<fonte>' prende una URL e restituisce il prezzo piu'
 basso trovato (float) oppure None se non riesce a estrarlo.
+
+NOTA: i siti cambiano struttura HTML periodicamente e alcuni (Amazon in
+primis) bloccano attivamente lo scraping. Se una fonte smette di
+funzionare, il resto continua a girare normalmente: si prende il prezzo
+migliore tra tutte le fonti che hanno risposto.
 """
 
 import argparse
@@ -42,8 +46,14 @@ DELAY_BETWEEN_REQUESTS = 4
 SESSION = requests.Session()
 SESSION.headers.update(HEADERS)
 
+# Range di sanita': scarta prezzi palesemente sbagliati (es. "12" o
+# "999999" catturati per errore da un pattern regex troppo largo)
+PREZZO_MIN_RAGIONEVOLE = 50
+PREZZO_MAX_RAGIONEVOLE = 3000
+
 
 def _parse_price_it(text):
+    """Converte '1.234,56 €' oppure '349,00€' in float 1234.56 / 349.00."""
     if not text:
         return None
     match = re.search(r"(\d{1,3}(?:\.\d{3})*(?:,\d{2})?)", text)
@@ -56,8 +66,11 @@ def _parse_price_it(text):
         return None
 
 
+def _prezzi_ragionevoli(prices):
+    return [p for p in prices if PREZZO_MIN_RAGIONEVOLE <= p <= PREZZO_MAX_RAGIONEVOLE]
+
+
 def scrape_trovaprezzi(url):
-    # Prima visita la home per ottenere i cookie di sessione, come farebbe un browser
     try:
         SESSION.get("https://www.trovaprezzi.it/", timeout=REQUEST_TIMEOUT)
         time.sleep(1)
@@ -80,6 +93,7 @@ def scrape_trovaprezzi(url):
             if p:
                 prices.append(p)
 
+    prices = _prezzi_ragionevoli(prices)
     return min(prices) if prices else None
 
 
@@ -88,15 +102,37 @@ def scrape_amazon(url):
     if resp.status_code != 200:
         return None
     soup = BeautifulSoup(resp.text, "html.parser")
-    el = soup.select_one(".a-price .a-offscreen")
-    if el:
-        return _parse_price_it(el.get_text())
-    return None
+
+    prices = []
+    for el in soup.select(".a-price .a-offscreen"):
+        p = _parse_price_it(el.get_text())
+        if p:
+            prices.append(p)
+
+    prices = _prezzi_ragionevoli(prices)
+    return min(prices) if prices else None
+
+
+def scrape_ebay(url):
+    resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
+    if resp.status_code != 200:
+        return None
+    soup = BeautifulSoup(resp.text, "html.parser")
+
+    prices = []
+    for el in soup.select(".s-item__price"):
+        p = _parse_price_it(el.get_text())
+        if p:
+            prices.append(p)
+
+    prices = _prezzi_ragionevoli(prices)
+    return min(prices) if prices else None
 
 
 SCRAPERS = {
     "trovaprezzi": scrape_trovaprezzi,
     "amazon": scrape_amazon,
+    "ebay": scrape_ebay,
 }
 
 
@@ -143,8 +179,7 @@ def run(debug=False):
                 print(f"[ERRORE] {comp_id} / {source_name}: {e}")
                 price = None
 
-            if debug:
-                print(f"{comp['nome']} @ {source_name}: {price}")
+            print(f"{comp['nome']} @ {source_name}: {price}")
 
             if price is not None and (best_price is None or price < best_price):
                 best_price = price
@@ -164,7 +199,7 @@ def run(debug=False):
                     f"(soglia: {comp['soglia_prezzo']:.2f} EUR) su {best_source}"
                 )
         else:
-            print(f"KO  {comp['nome']}: nessun prezzo trovato")
+            print(f"KO  {comp['nome']}: nessun prezzo trovato su nessuna fonte")
 
     save_history(history)
 
