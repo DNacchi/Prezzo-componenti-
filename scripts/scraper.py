@@ -1,11 +1,6 @@
-
 """
-Scraper prezzi componenti PC - versione multi-fonte con verifica titolo.
-
-Ogni funzione 'scrape_<fonte>' prende una URL e una lista di parole chiave,
-e restituisce il prezzo piu' basso TRA I PRODOTTI IL CUI TITOLO CONTIENE
-TUTTE LE PAROLE CHIAVE (case-insensitive). Questo evita di scambiare
-accessori/prodotti correlati per il componente cercato.
+Scraper prezzi componenti PC - versione multi-fonte con verifica titolo
+e supporto siti JS-rendered (Playwright).
 """
 
 import argparse
@@ -41,8 +36,35 @@ DELAY_BETWEEN_REQUESTS = 4
 SESSION = requests.Session()
 SESSION.headers.update(HEADERS)
 
-PREZZO_MIN_RAGIONEVOLE = 50
+PREZZO_MIN_RAGIONEVOLE = 20
 PREZZO_MAX_RAGIONEVOLE = 3000
+
+_PLAYWRIGHT = None
+_BROWSER = None
+_PAGE = None
+
+
+def _get_playwright_page():
+    global _PLAYWRIGHT, _BROWSER, _PAGE
+    if _PAGE is None:
+        from playwright.sync_api import sync_playwright
+
+        _PLAYWRIGHT = sync_playwright().start()
+        _BROWSER = _PLAYWRIGHT.chromium.launch(headless=True)
+        context = _BROWSER.new_context(
+            user_agent=HEADERS["User-Agent"], locale="it-IT"
+        )
+        _PAGE = context.new_page()
+    return _PAGE
+
+
+def _chiudi_playwright():
+    global _PLAYWRIGHT, _BROWSER, _PAGE
+    if _BROWSER:
+        _BROWSER.close()
+    if _PLAYWRIGHT:
+        _PLAYWRIGHT.stop()
+    _PLAYWRIGHT, _BROWSER, _PAGE = None, None, None
 
 
 def _parse_price_it(text):
@@ -70,10 +92,6 @@ def _titolo_corrisponde(titolo, parole_chiave):
 
 
 def scrape_trovaprezzi(url, parole_chiave):
-    """
-    NOTA: Trovaprezzi blocca sistematicamente gli IP dei server GitHub
-    Actions con 403 Forbidden. Inaffidabile finche' non si usa un proxy.
-    """
     try:
         SESSION.get("https://www.trovaprezzi.it/", timeout=REQUEST_TIMEOUT)
         time.sleep(1)
@@ -100,10 +118,6 @@ def scrape_trovaprezzi(url, parole_chiave):
 
 
 def scrape_amazon(url, parole_chiave):
-    """
-    Verifica che il titolo di ogni risultato contenga le parole chiave
-    prima di considerarne il prezzo, per scartare accessori correlati.
-    """
     resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
     if resp.status_code != 200:
         return None
@@ -127,9 +141,6 @@ def scrape_amazon(url, parole_chiave):
 
 
 def scrape_ebay(url, parole_chiave):
-    """
-    Stesso principio: titolo dell'annuncio deve contenere le parole chiave.
-    """
     resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
     if resp.status_code != 200:
         return None
@@ -156,10 +167,51 @@ def scrape_ebay(url, parole_chiave):
     return min(prices) if prices else None
 
 
+def scrape_bpm_power(url, parole_chiave):
+    """
+    BPM-power carica i prodotti via JavaScript, serve un browser headless
+    (Playwright) per vedere il contenuto reale.
+
+    NOTA: i selettori qui sotto sono un primo tentativo generico, non
+    verificato sul sito reale. Se il primo giro restituisce sempre None,
+    vanno affinati guardando il log del numero di 'candidati' trovati.
+    """
+    page = _get_playwright_page()
+    try:
+        page.goto(url, wait_until="networkidle", timeout=30000)
+        page.wait_for_timeout(1500)
+    except Exception:
+        return None
+
+    html = page.content()
+    soup = BeautifulSoup(html, "html.parser")
+
+    prices = []
+    candidati = soup.select(
+        ".product-item, .product-card, article.product, .card-product, "
+        "li.product, .product-list-item, [class*='product-item']"
+    )
+    print(f"  [bpm_power debug] candidati trovati: {len(candidati)}")
+
+    for card in candidati:
+        titolo = card.get_text(" ", strip=True)
+        if not _titolo_corrisponde(titolo, parole_chiave):
+            continue
+        m = re.search(r"(\d{1,3}(?:\.\d{3})*,\d{2})\s*€", titolo)
+        if m:
+            p = _parse_price_it(m.group(1))
+            if p:
+                prices.append(p)
+
+    prices = _prezzi_ragionevoli(prices)
+    return min(prices) if prices else None
+
+
 SCRAPERS = {
     "trovaprezzi": scrape_trovaprezzi,
     "amazon": scrape_amazon,
     "ebay": scrape_ebay,
+    "bpm_power": scrape_bpm_power,
 }
 
 
@@ -188,46 +240,49 @@ def run(debug=False):
 
     alerts = []
 
-    for comp in components:
-        comp_id = comp["id"]
-        parole_chiave = comp.get("parole_chiave", [])
-        history.setdefault(comp_id, {"nome": comp["nome"], "prezzi": []})
+    try:
+        for comp in components:
+            comp_id = comp["id"]
+            parole_chiave = comp.get("parole_chiave", [])
+            history.setdefault(comp_id, {"nome": comp["nome"], "prezzi": []})
 
-        best_price = None
-        best_source = None
+            best_price = None
+            best_source = None
 
-        for source_name, url in comp["fonti"].items():
-            scraper_fn = SCRAPERS.get(source_name)
-            if not scraper_fn:
-                print(f"[WARN] nessuno scraper per la fonte '{source_name}'")
-                continue
-            try:
-                price = scraper_fn(url, parole_chiave)
-            except Exception as e:
-                print(f"[ERRORE] {comp_id} / {source_name}: {e}")
-                price = None
+            for source_name, url in comp["fonti"].items():
+                scraper_fn = SCRAPERS.get(source_name)
+                if not scraper_fn:
+                    print(f"[WARN] nessuno scraper per la fonte '{source_name}'")
+                    continue
+                try:
+                    price = scraper_fn(url, parole_chiave)
+                except Exception as e:
+                    print(f"[ERRORE] {comp_id} / {source_name}: {e}")
+                    price = None
 
-            print(f"{comp['nome']} @ {source_name}: {price}")
+                print(f"{comp['nome']} @ {source_name}: {price}")
 
-            if price is not None and (best_price is None or price < best_price):
-                best_price = price
-                best_source = source_name
+                if price is not None and (best_price is None or price < best_price):
+                    best_price = price
+                    best_source = source_name
 
-            time.sleep(DELAY_BETWEEN_REQUESTS)
+                time.sleep(DELAY_BETWEEN_REQUESTS)
 
-        if best_price is not None:
-            history[comp_id]["prezzi"].append(
-                {"data": now, "prezzo": best_price, "fonte": best_source}
-            )
-            print(f"OK  {comp['nome']}: {best_price} EUR ({best_source})")
-
-            if best_price <= comp.get("soglia_prezzo", 0):
-                alerts.append(
-                    f"🔔 {comp['nome']} e' sceso a {best_price:.2f} EUR "
-                    f"(soglia: {comp['soglia_prezzo']:.2f} EUR) su {best_source}"
+            if best_price is not None:
+                history[comp_id]["prezzi"].append(
+                    {"data": now, "prezzo": best_price, "fonte": best_source}
                 )
-        else:
-            print(f"KO  {comp['nome']}: nessun prezzo trovato su nessuna fonte")
+                print(f"OK  {comp['nome']}: {best_price} EUR ({best_source})")
+
+                if best_price <= comp.get("soglia_prezzo", 0):
+                    alerts.append(
+                        f"🔔 {comp['nome']} e' sceso a {best_price:.2f} EUR "
+                        f"(soglia: {comp['soglia_prezzo']:.2f} EUR) su {best_source}"
+                    )
+            else:
+                print(f"KO  {comp['nome']}: nessun prezzo trovato su nessuna fonte")
+    finally:
+        _chiudi_playwright()
 
     save_history(history)
 
