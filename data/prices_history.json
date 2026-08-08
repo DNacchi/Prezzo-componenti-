@@ -26,6 +26,11 @@
         "data": "2026-08-08T19:18:59.277380+00:00",
         "prezzo": 291.99,
         "fonte": "amazon"
+      },
+      {
+        "data": "2026-08-08T19:50:29.820022+00:00",
+        "prezzo": 291.99,
+        "fonte": "amazon"
       }
     ]
   },
@@ -55,6 +60,61 @@
       {
         "data": "2026-08-08T19:18:59.277380+00:00",
         "prezzo": 497.39,
+        "fonte": "ebay"
+      },
+      {
+        "data": "2026-08-08T19:50:29.820022+00:00",
+        "prezzo": 497.39,
+        "fonte": "ebay"
+      }
+    ]
+  },
+  "arctic_lf3_pro_360": {
+    "nome": "Arctic Liquid Freezer III Pro 360",
+    "prezzi": [
+      {
+        "data": "2026-08-08T19:50:29.820022+00:00",
+        "prezzo": 29.98,
+        "fonte": "ebay"
+      }
+    ]
+  },
+  "ssd_predator_gm7_1tb": {
+    "nome": "Acer Predator GM7 1TB",
+    "prezzi": [
+      {
+        "data": "2026-08-08T19:50:29.820022+00:00",
+        "prezzo": 53.13,
+        "fonte": "ebay"
+      }
+    ]
+  },
+  "asus_tuf_b850_plus": {
+    "nome": "Asus TUF Gaming B850-Plus",
+    "prezzi": [
+      {
+        "data": "2026-08-08T19:50:29.820022+00:00",
+        "prezzo": 84.43,
+        "fonte": "ebay"
+      }
+    ]
+  },
+  "msi_mag_a750": {
+    "nome": "MSI MAG A750BN (750W)",
+    "prezzi": [
+      {
+        "data": "2026-08-08T19:50:29.820022+00:00",
+        "prezzo": 23.36,
+        "fonte": "ebay"
+      }
+    ]
+  },
+  "ram_ddr5_32gb": {
+    "nome": "RAM DDR5 32GB (2x16GB)",
+    "prezzi": [
+      {
+        "data": "2026-08-08T19:50:29.820022+00:00",
+        "prezzo": 250.0,
         "fonte": "ebay"
       }
     ]

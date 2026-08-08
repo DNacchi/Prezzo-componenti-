@@ -1,0 +1,31 @@
+{
+  "tutti_compatibili": true,
+  "controlli": [
+    {
+      "check": "Socket CPU / scheda madre",
+      "ok": true,
+      "dettaglio": "AMD Ryzen 7 7800X3D (AM5) su Asus TUF Gaming B850-Plus (AM5)"
+    },
+    {
+      "check": "Tipo RAM",
+      "ok": true,
+      "dettaglio": "Scheda madre richiede DDR5, RAM scelta e' DDR5"
+    },
+    {
+      "check": "Dissipatore / socket CPU",
+      "ok": true,
+      "dettaglio": "Arctic Liquid Freezer III Pro 360 supporta AM5, AM4, LGA1700, LGA1851"
+    },
+    {
+      "check": "Potenza alimentatore",
+      "ok": true,
+      "dettaglio": "Consumo stimato ~440W (CPU 120W + GPU 220W + ~100W resto sistema) su alimentatore da 750W → margine 41% (sufficiente)"
+    },
+    {
+      "check": "SSD M.2",
+      "ok": true,
+      "dettaglio": "Acer Predator GM7 1TB compatibile con slot M.2 NVMe standard"
+    }
+  ],
+  "nota": "Controllo automatico su compatibilita' elettrica/socket/RAM. Verifica sempre manualmente ingombro fisico (lunghezza GPU, altezza dissipatore, spazio radiatore) rispetto al tuo case."
+}

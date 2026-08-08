@@ -14,6 +14,7 @@
     padding: 24px 16px;
   }
   h1 { font-size: 1.4rem; margin-bottom: 4px; }
+  h3 { font-size: 1rem; margin: 0 0 12px 0; }
   .subtitle { color: #999; font-size: 0.85rem; margin-bottom: 24px; }
   .card {
     background: #1a1d24;
@@ -27,27 +28,76 @@
   .price-meta { font-size: 0.8rem; color: #888; margin-bottom: 12px; }
   .no-data { color: #888; font-style: italic; }
   canvas { max-height: 220px; }
+  .compat-ok { color: #4ade80; }
+  .compat-ko { color: #f87171; }
+  .compat-riga { font-size: 0.85rem; margin-bottom: 8px; line-height: 1.4; }
+  .compat-nota { font-size: 0.75rem; color: #888; margin-top: 12px; font-style: italic; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+  .badge-ok { background: rgba(74,222,128,0.15); color: #4ade80; }
+  .badge-ko { background: rgba(248,113,113,0.15); color: #f87171; }
 </style>
 </head>
 <body>
   <h1>💻 Monitor Prezzi Componenti PC</h1>
-  <div class="subtitle">Ultimo aggiornamento: 08/08/2026 19:19 UTC</div>
+  <div class="subtitle">Ultimo aggiornamento: 08/08/2026 19:52 UTC</div>
+  
+<div class="card">
+  <h2>🔧 Compatibilità build <span class="badge badge-ok">Tutto compatibile</span></h2>
+  <div class="compat-riga compat-ok">✅ <b>Socket CPU / scheda madre</b>: AMD Ryzen 7 7800X3D (AM5) su Asus TUF Gaming B850-Plus (AM5)</div><div class="compat-riga compat-ok">✅ <b>Tipo RAM</b>: Scheda madre richiede DDR5, RAM scelta e' DDR5</div><div class="compat-riga compat-ok">✅ <b>Dissipatore / socket CPU</b>: Arctic Liquid Freezer III Pro 360 supporta AM5, AM4, LGA1700, LGA1851</div><div class="compat-riga compat-ok">✅ <b>Potenza alimentatore</b>: Consumo stimato ~440W (CPU 120W + GPU 220W + ~100W resto sistema) su alimentatore da 750W → margine 41% (sufficiente)</div><div class="compat-riga compat-ok">✅ <b>SSD M.2</b>: Acer Predator GM7 1TB compatibile con slot M.2 NVMe standard</div>
+  <div class="compat-nota">Controllo automatico su compatibilita' elettrica/socket/RAM. Verifica sempre manualmente ingombro fisico (lunghezza GPU, altezza dissipatore, spazio radiatore) rispetto al tuo case.</div>
+</div>
+
   
 <div class="card">
   <h2>AMD Ryzen 7 7800X3D</h2>
-  <div class="price-now">291.99 €</div><div class="price-meta">fonte: amazon · 2026-08-08 19:18</div>
+  <div class="price-now">291.99 €</div><div class="price-meta">fonte: amazon · 2026-08-08 19:50</div>
   <canvas id="chart_ryzen7_7800x3d"></canvas>
 </div>
 
 
 <div class="card">
   <h2>AMD Radeon RX 9070</h2>
-  <div class="price-now">497.39 €</div><div class="price-meta">fonte: ebay · 2026-08-08 19:18</div>
+  <div class="price-now">497.39 €</div><div class="price-meta">fonte: ebay · 2026-08-08 19:50</div>
   <canvas id="chart_rx_9070"></canvas>
 </div>
 
+
+<div class="card">
+  <h2>Arctic Liquid Freezer III Pro 360</h2>
+  <div class="price-now">29.98 €</div><div class="price-meta">fonte: ebay · 2026-08-08 19:50</div>
+  <canvas id="chart_arctic_lf3_pro_360"></canvas>
+</div>
+
+
+<div class="card">
+  <h2>Acer Predator GM7 1TB</h2>
+  <div class="price-now">53.13 €</div><div class="price-meta">fonte: ebay · 2026-08-08 19:50</div>
+  <canvas id="chart_ssd_predator_gm7_1tb"></canvas>
+</div>
+
+
+<div class="card">
+  <h2>Asus TUF Gaming B850-Plus</h2>
+  <div class="price-now">84.43 €</div><div class="price-meta">fonte: ebay · 2026-08-08 19:50</div>
+  <canvas id="chart_asus_tuf_b850_plus"></canvas>
+</div>
+
+
+<div class="card">
+  <h2>MSI MAG A750BN (750W)</h2>
+  <div class="price-now">23.36 €</div><div class="price-meta">fonte: ebay · 2026-08-08 19:50</div>
+  <canvas id="chart_msi_mag_a750"></canvas>
+</div>
+
+
+<div class="card">
+  <h2>RAM DDR5 32GB (2x16GB)</h2>
+  <div class="price-now">250.00 €</div><div class="price-meta">fonte: ebay · 2026-08-08 19:50</div>
+  <canvas id="chart_ram_ddr5_32gb"></canvas>
+</div>
+
   <script>
-    const chartData = {"ryzen7_7800x3d": {"labels": ["2026-08-08", "2026-08-08", "2026-08-08", "2026-08-08", "2026-08-08"], "prices": [112.9, 113.49, 291.99, 291.99, 291.99]}, "rx_9070": {"labels": ["2026-08-08", "2026-08-08", "2026-08-08", "2026-08-08", "2026-08-08"], "prices": [112.9, 248.27, 497.39, 497.39, 497.39]}};
+    const chartData = {"ryzen7_7800x3d": {"labels": ["2026-08-08", "2026-08-08", "2026-08-08", "2026-08-08", "2026-08-08", "2026-08-08"], "prices": [112.9, 113.49, 291.99, 291.99, 291.99, 291.99]}, "rx_9070": {"labels": ["2026-08-08", "2026-08-08", "2026-08-08", "2026-08-08", "2026-08-08", "2026-08-08"], "prices": [112.9, 248.27, 497.39, 497.39, 497.39, 497.39]}, "arctic_lf3_pro_360": {"labels": ["2026-08-08"], "prices": [29.98]}, "ssd_predator_gm7_1tb": {"labels": ["2026-08-08"], "prices": [53.13]}, "asus_tuf_b850_plus": {"labels": ["2026-08-08"], "prices": [84.43]}, "msi_mag_a750": {"labels": ["2026-08-08"], "prices": [23.36]}, "ram_ddr5_32gb": {"labels": ["2026-08-08"], "prices": [250.0]}};
     Object.entries(chartData).forEach(([id, d]) => {
       const ctx = document.getElementById('chart_' + id);
       if (!ctx) return;
