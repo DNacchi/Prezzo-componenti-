@@ -1,6 +1,6 @@
 """
-Scraper prezzi componenti PC - versione multi-fonte con verifica titolo
-e supporto siti JS-rendered (Playwright).
+Scraper prezzi componenti PC - versione multi-fonte con verifica titolo,
+soglia minima per componente, e supporto siti JS-rendered (Playwright).
 """
 
 import argparse
@@ -36,7 +36,6 @@ DELAY_BETWEEN_REQUESTS = 4
 SESSION = requests.Session()
 SESSION.headers.update(HEADERS)
 
-PREZZO_MIN_RAGIONEVOLE = 20
 PREZZO_MAX_RAGIONEVOLE = 3000
 
 _PLAYWRIGHT = None
@@ -80,8 +79,8 @@ def _parse_price_it(text):
         return None
 
 
-def _prezzi_ragionevoli(prices):
-    return [p for p in prices if PREZZO_MIN_RAGIONEVOLE <= p <= PREZZO_MAX_RAGIONEVOLE]
+def _prezzi_ragionevoli(prices, prezzo_min=20):
+    return [p for p in prices if prezzo_min <= p <= PREZZO_MAX_RAGIONEVOLE]
 
 
 def _titolo_corrisponde(titolo, parole_chiave):
@@ -91,7 +90,7 @@ def _titolo_corrisponde(titolo, parole_chiave):
     return all(kw.lower() in titolo_lower for kw in parole_chiave)
 
 
-def scrape_trovaprezzi(url, parole_chiave):
+def scrape_trovaprezzi(url, parole_chiave, prezzo_min):
     try:
         SESSION.get("https://www.trovaprezzi.it/", timeout=REQUEST_TIMEOUT)
         time.sleep(1)
@@ -113,11 +112,11 @@ def scrape_trovaprezzi(url, parole_chiave):
             if p:
                 prices.append(p)
 
-    prices = _prezzi_ragionevoli(prices)
+    prices = _prezzi_ragionevoli(prices, prezzo_min)
     return min(prices) if prices else None
 
 
-def scrape_amazon(url, parole_chiave):
+def scrape_amazon(url, parole_chiave, prezzo_min):
     resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
     if resp.status_code != 200:
         return None
@@ -136,11 +135,11 @@ def scrape_amazon(url, parole_chiave):
             if p:
                 prices.append(p)
 
-    prices = _prezzi_ragionevoli(prices)
+    prices = _prezzi_ragionevoli(prices, prezzo_min)
     return min(prices) if prices else None
 
 
-def scrape_ebay(url, parole_chiave):
+def scrape_ebay(url, parole_chiave, prezzo_min):
     resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
     if resp.status_code != 200:
         return None
@@ -163,24 +162,22 @@ def scrape_ebay(url, parole_chiave):
         if p:
             prices.append(p)
 
-    prices = _prezzi_ragionevoli(prices)
+    prices = _prezzi_ragionevoli(prices, prezzo_min)
     return min(prices) if prices else None
 
 
-def scrape_bpm_power(url, parole_chiave):
+def scrape_bpm_power(url, parole_chiave, prezzo_min):
     """
-    BPM-power carica i prodotti via JavaScript, serve un browser headless
-    (Playwright) per vedere il contenuto reale.
-
-    NOTA: i selettori qui sotto sono un primo tentativo generico, non
-    verificato sul sito reale. Se il primo giro restituisce sempre None,
-    vanno affinati guardando il log del numero di 'candidati' trovati.
+    BPM-power carica i prodotti via JavaScript. Prova prima con selettori
+    CSS specifici; se non trova nulla, usa un fallback che cerca pattern
+    di prezzo in tutto il testo della pagina renderizzata.
     """
     page = _get_playwright_page()
     try:
         page.goto(url, wait_until="networkidle", timeout=30000)
         page.wait_for_timeout(1500)
-    except Exception:
+    except Exception as e:
+        print(f"  [bpm_power debug] errore caricamento pagina: {e}")
         return None
 
     html = page.content()
@@ -191,7 +188,7 @@ def scrape_bpm_power(url, parole_chiave):
         ".product-item, .product-card, article.product, .card-product, "
         "li.product, .product-list-item, [class*='product-item']"
     )
-    print(f"  [bpm_power debug] candidati trovati: {len(candidati)}")
+    print(f"  [bpm_power debug] candidati (selettori specifici): {len(candidati)}")
 
     for card in candidati:
         titolo = card.get_text(" ", strip=True)
@@ -203,7 +200,20 @@ def scrape_bpm_power(url, parole_chiave):
             if p:
                 prices.append(p)
 
-    prices = _prezzi_ragionevoli(prices)
+    if not prices:
+        testo_completo = soup.get_text("\n", strip=True)
+        righe = testo_completo.split("\n")
+        print(f"  [bpm_power debug] fallback: {len(righe)} righe di testo nella pagina")
+        for i, riga in enumerate(righe):
+            if _titolo_corrisponde(riga, parole_chiave):
+                blocco = " ".join(righe[i:i + 4])
+                m = re.search(r"(\d{1,3}(?:\.\d{3})*,\d{2})\s*€", blocco)
+                if m:
+                    p = _parse_price_it(m.group(1))
+                    if p:
+                        prices.append(p)
+
+    prices = _prezzi_ragionevoli(prices, prezzo_min)
     return min(prices) if prices else None
 
 
@@ -244,6 +254,7 @@ def run(debug=False):
         for comp in components:
             comp_id = comp["id"]
             parole_chiave = comp.get("parole_chiave", [])
+            prezzo_min = comp.get("prezzo_min_atteso", 20)
             history.setdefault(comp_id, {"nome": comp["nome"], "prezzi": []})
 
             best_price = None
@@ -255,7 +266,7 @@ def run(debug=False):
                     print(f"[WARN] nessuno scraper per la fonte '{source_name}'")
                     continue
                 try:
-                    price = scraper_fn(url, parole_chiave)
+                    price = scraper_fn(url, parole_chiave, prezzo_min)
                 except Exception as e:
                     print(f"[ERRORE] {comp_id} / {source_name}: {e}")
                     price = None
