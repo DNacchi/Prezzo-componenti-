@@ -1,11 +1,9 @@
+
 """
 Scraper prezzi componenti PC.
 
 Ogni funzione 'scrape_<fonte>' prende una URL e restituisce il prezzo piu'
 basso trovato (float) oppure None se non riesce a estrarlo.
-
-NOTA IMPORTANTE: i siti cambiano struttura HTML periodicamente. Se uno
-scraper smette di funzionare, va aggiornato il selettore CSS corrispondente.
 """
 
 import argparse
@@ -25,17 +23,27 @@ HISTORY_FILE = ROOT / "data" / "prices_history.json"
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-        "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+        "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
     ),
-    "Accept-Language": "it-IT,it;q=0.9",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Referer": "https://www.google.com/",
+    "Connection": "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "cross-site",
 }
 
-REQUEST_TIMEOUT = 15
-DELAY_BETWEEN_REQUESTS = 3
+REQUEST_TIMEOUT = 20
+DELAY_BETWEEN_REQUESTS = 4
+
+SESSION = requests.Session()
+SESSION.headers.update(HEADERS)
 
 
 def _parse_price_it(text):
-    """Converte '1.234,56 €' oppure '349,00€' in float 1234.56 / 349.00."""
     if not text:
         return None
     match = re.search(r"(\d{1,3}(?:\.\d{3})*(?:,\d{2})?)", text)
@@ -49,8 +57,14 @@ def _parse_price_it(text):
 
 
 def scrape_trovaprezzi(url):
-    """Estrae il prezzo piu' basso dalla pagina di ricerca Trovaprezzi."""
-    resp = requests.get(url, headers=HEADERS, timeout=REQUEST_TIMEOUT)
+    # Prima visita la home per ottenere i cookie di sessione, come farebbe un browser
+    try:
+        SESSION.get("https://www.trovaprezzi.it/", timeout=REQUEST_TIMEOUT)
+        time.sleep(1)
+    except requests.RequestException:
+        pass
+
+    resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
     resp.raise_for_status()
     soup = BeautifulSoup(resp.text, "html.parser")
 
@@ -70,11 +84,7 @@ def scrape_trovaprezzi(url):
 
 
 def scrape_amazon(url):
-    """
-    Placeholder per Amazon. Amazon blocca aggressivamente lo scraping diretto.
-    Non garantito funzionare in modo continuativo.
-    """
-    resp = requests.get(url, headers=HEADERS, timeout=REQUEST_TIMEOUT)
+    resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
     if resp.status_code != 200:
         return None
     soup = BeautifulSoup(resp.text, "html.parser")
