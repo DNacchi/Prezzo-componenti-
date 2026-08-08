@@ -10,7 +10,7 @@
         "trovaprezzi": "https://www.trovaprezzi.it/cerca.aspx?libera=AMD+Ryzen+7+7800X3D",
         "ebay": "https://www.ebay.it/sch/i.html?_nkw=AMD+Ryzen+7+7800X3D&LH_BIN=1&LH_ItemCondition=1000",
         "amazon": "https://www.amazon.it/s?k=AMD+Ryzen+7+7800X3D",
-        "bpm_power": "https://www.bpm-power.com/it/online?k=AMD+Ryzen+7+7800X3D"
+        "bpm_power": "AMD Ryzen 7 7800X3D"
       }
     },
     {
@@ -23,7 +23,7 @@
         "trovaprezzi": "https://www.trovaprezzi.it/cerca.aspx?libera=Radeon+RX+9070",
         "ebay": "https://www.ebay.it/sch/i.html?_nkw=AMD+Radeon+RX+9070&LH_BIN=1&LH_ItemCondition=1000",
         "amazon": "https://www.amazon.it/s?k=AMD+Radeon+RX+9070",
-        "bpm_power": "https://www.bpm-power.com/it/online?k=Radeon+RX+9070"
+        "bpm_power": "Radeon RX 9070"
       }
     },
     {
@@ -35,7 +35,7 @@
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=Arctic+Liquid+Freezer+III+Pro+360",
         "ebay": "https://www.ebay.it/sch/i.html?_nkw=Arctic+Liquid+Freezer+III+Pro+360&LH_BIN=1&LH_ItemCondition=1000",
-        "bpm_power": "https://www.bpm-power.com/it/online?k=Arctic+Liquid+Freezer+III+Pro+360"
+        "bpm_power": "Arctic Liquid Freezer III Pro 360"
       }
     },
     {
@@ -47,7 +47,7 @@
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=Predator+GM7+1TB+SSD",
         "ebay": "https://www.ebay.it/sch/i.html?_nkw=Predator+GM7+1TB+SSD&LH_BIN=1&LH_ItemCondition=1000",
-        "bpm_power": "https://www.bpm-power.com/it/online?k=Predator+GM7+1TB"
+        "bpm_power": "Predator GM7 1TB"
       }
     },
     {
@@ -59,7 +59,7 @@
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=Asus+TUF+Gaming+B850+Plus",
         "ebay": "https://www.ebay.it/sch/i.html?_nkw=Asus+TUF+Gaming+B850+Plus&LH_BIN=1&LH_ItemCondition=1000",
-        "bpm_power": "https://www.bpm-power.com/it/online?k=Asus+TUF+Gaming+B850+Plus"
+        "bpm_power": "Asus TUF Gaming B850 Plus"
       }
     },
     {
@@ -71,7 +71,7 @@
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=MSI+MAG+A750+alimentatore",
         "ebay": "https://www.ebay.it/sch/i.html?_nkw=MSI+MAG+A750+alimentatore&LH_BIN=1&LH_ItemCondition=1000",
-        "bpm_power": "https://www.bpm-power.com/it/online?k=MSI+MAG+A750"
+        "bpm_power": "MSI MAG A750"
       }
     },
     {
@@ -83,7 +83,7 @@
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=RAM+DDR5+32GB+2x16GB",
         "ebay": "https://www.ebay.it/sch/i.html?_nkw=RAM+DDR5+32GB+2x16GB&LH_BIN=1&LH_ItemCondition=1000",
-        "bpm_power": "https://www.bpm-power.com/it/online?k=RAM+DDR5+32GB"
+        "bpm_power": "RAM DDR5 32GB"
       }
     }
   ]
