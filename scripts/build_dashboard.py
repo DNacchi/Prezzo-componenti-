@@ -1,6 +1,6 @@
 """
-Genera docs/index.html a partire da data/prices_history.json.
-La cartella docs/ viene pubblicata da GitHub Pages.
+Genera docs/index.html a partire da data/prices_history.json e
+data/compatibility.json.
 """
 
 import json
@@ -9,6 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 HISTORY_FILE = ROOT / "data" / "prices_history.json"
+COMPAT_FILE = ROOT / "data" / "compatibility.json"
 OUTPUT_FILE = ROOT / "docs" / "index.html"
 
 TEMPLATE = """<!DOCTYPE html>
@@ -27,6 +28,7 @@ TEMPLATE = """<!DOCTYPE html>
     padding: 24px 16px;
   }}
   h1 {{ font-size: 1.4rem; margin-bottom: 4px; }}
+  h3 {{ font-size: 1rem; margin: 0 0 12px 0; }}
   .subtitle {{ color: #999; font-size: 0.85rem; margin-bottom: 24px; }}
   .card {{
     background: #1a1d24;
@@ -40,11 +42,19 @@ TEMPLATE = """<!DOCTYPE html>
   .price-meta {{ font-size: 0.8rem; color: #888; margin-bottom: 12px; }}
   .no-data {{ color: #888; font-style: italic; }}
   canvas {{ max-height: 220px; }}
+  .compat-ok {{ color: #4ade80; }}
+  .compat-ko {{ color: #f87171; }}
+  .compat-riga {{ font-size: 0.85rem; margin-bottom: 8px; line-height: 1.4; }}
+  .compat-nota {{ font-size: 0.75rem; color: #888; margin-top: 12px; font-style: italic; }}
+  .badge {{ display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }}
+  .badge-ok {{ background: rgba(74,222,128,0.15); color: #4ade80; }}
+  .badge-ko {{ background: rgba(248,113,113,0.15); color: #f87171; }}
 </style>
 </head>
 <body>
   <h1>💻 Monitor Prezzi Componenti PC</h1>
   <div class="subtitle">Ultimo aggiornamento: {last_update}</div>
+  {compat_html}
   {cards}
   <script>
     const chartData = {chart_data_json};
@@ -88,6 +98,37 @@ CARD_TEMPLATE = """
 """
 
 
+def build_compat_html():
+    if not COMPAT_FILE.exists():
+        return ""
+
+    with open(COMPAT_FILE, "r", encoding="utf-8") as f:
+        compat = json.load(f)
+
+    tutti_ok = compat.get("tutti_compatibili", False)
+    badge = (
+        '<span class="badge badge-ok">Tutto compatibile</span>'
+        if tutti_ok
+        else '<span class="badge badge-ko">Problemi rilevati</span>'
+    )
+
+    righe = []
+    for c in compat.get("controlli", []):
+        classe = "compat-ok" if c["ok"] else "compat-ko"
+        simbolo = "✅" if c["ok"] else "❌"
+        righe.append(
+            f'<div class="compat-riga {classe}">{simbolo} <b>{c["check"]}</b>: {c["dettaglio"]}</div>'
+        )
+
+    return f"""
+<div class="card">
+  <h2>🔧 Compatibilità build {badge}</h2>
+  {"".join(righe)}
+  <div class="compat-nota">{compat.get("nota", "")}</div>
+</div>
+"""
+
+
 def build():
     history = {}
     if HISTORY_FILE.exists():
@@ -121,6 +162,7 @@ def build():
 
     html = TEMPLATE.format(
         last_update=datetime.now(timezone.utc).strftime("%d/%m/%Y %H:%M UTC"),
+        compat_html=build_compat_html(),
         cards="\n".join(cards_html) if cards_html else '<p class="no-data">Nessun componente monitorato ancora.</p>',
         chart_data_json=json.dumps(chart_data, ensure_ascii=False),
     )
