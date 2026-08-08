@@ -1,10 +1,14 @@
+
 name: Monitor Prezzi PC
 
 on:
   schedule:
-    # Ogni 30 minuti
     - cron: "*/30 * * * *"
-  workflow_dispatch: {}  # permette di lanciarlo manualmente da GitHub quando vuoi
+  workflow_dispatch: {}
+
+concurrency:
+  group: monitor-prezzi-pc
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -44,6 +48,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/ docs/
           git diff --staged --quiet || git commit -m "Aggiornamento prezzi automatico"
+          git pull --rebase origin main
           git push
 
   deploy-pages:
