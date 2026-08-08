@@ -4,79 +4,86 @@
       "id": "ryzen7_7800x3d",
       "nome": "AMD Ryzen 7 7800X3D",
       "soglia_prezzo": 350.0,
+      "prezzo_min_atteso": 250,
       "parole_chiave": ["7800x3d"],
       "fonti": {
         "trovaprezzi": "https://www.trovaprezzi.it/cerca.aspx?libera=AMD+Ryzen+7+7800X3D",
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=AMD+Ryzen+7+7800X3D",
+        "ebay": "https://www.ebay.it/sch/i.html?_nkw=AMD+Ryzen+7+7800X3D&LH_BIN=1&LH_ItemCondition=1000",
         "amazon": "https://www.amazon.it/s?k=AMD+Ryzen+7+7800X3D",
-        "bpm_power": "https://www.bpm-power.com/it/online?q=AMD+Ryzen+7+7800X3D"
+        "bpm_power": "https://www.bpm-power.com/it/online?k=AMD+Ryzen+7+7800X3D"
       }
     },
     {
       "id": "rx_9070",
       "nome": "AMD Radeon RX 9070",
       "soglia_prezzo": 600.0,
+      "prezzo_min_atteso": 450,
       "parole_chiave": ["9070"],
       "fonti": {
         "trovaprezzi": "https://www.trovaprezzi.it/cerca.aspx?libera=Radeon+RX+9070",
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=AMD+Radeon+RX+9070",
+        "ebay": "https://www.ebay.it/sch/i.html?_nkw=AMD+Radeon+RX+9070&LH_BIN=1&LH_ItemCondition=1000",
         "amazon": "https://www.amazon.it/s?k=AMD+Radeon+RX+9070",
-        "bpm_power": "https://www.bpm-power.com/it/online?q=Radeon+RX+9070"
+        "bpm_power": "https://www.bpm-power.com/it/online?k=Radeon+RX+9070"
       }
     },
     {
       "id": "arctic_lf3_pro_360",
       "nome": "Arctic Liquid Freezer III Pro 360",
       "soglia_prezzo": 110.0,
+      "prezzo_min_atteso": 90,
       "parole_chiave": ["liquid freezer", "360"],
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=Arctic+Liquid+Freezer+III+Pro+360",
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=Arctic+Liquid+Freezer+III+Pro+360",
-        "bpm_power": "https://www.bpm-power.com/it/online?q=Arctic+Liquid+Freezer+III+Pro+360"
+        "ebay": "https://www.ebay.it/sch/i.html?_nkw=Arctic+Liquid+Freezer+III+Pro+360&LH_BIN=1&LH_ItemCondition=1000",
+        "bpm_power": "https://www.bpm-power.com/it/online?k=Arctic+Liquid+Freezer+III+Pro+360"
       }
     },
     {
       "id": "ssd_predator_gm7_1tb",
       "nome": "Acer Predator GM7 1TB",
       "soglia_prezzo": 70.0,
+      "prezzo_min_atteso": 45,
       "parole_chiave": ["gm7", "1tb"],
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=Predator+GM7+1TB+SSD",
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=Predator+GM7+1TB+SSD",
-        "bpm_power": "https://www.bpm-power.com/it/online?q=Predator+GM7+1TB"
+        "ebay": "https://www.ebay.it/sch/i.html?_nkw=Predator+GM7+1TB+SSD&LH_BIN=1&LH_ItemCondition=1000",
+        "bpm_power": "https://www.bpm-power.com/it/online?k=Predator+GM7+1TB"
       }
     },
     {
       "id": "asus_tuf_b850_plus",
       "nome": "Asus TUF Gaming B850-Plus",
       "soglia_prezzo": 190.0,
+      "prezzo_min_atteso": 150,
       "parole_chiave": ["tuf", "b850"],
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=Asus+TUF+Gaming+B850+Plus",
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=Asus+TUF+Gaming+B850+Plus",
-        "bpm_power": "https://www.bpm-power.com/it/online?q=Asus+TUF+Gaming+B850+Plus"
+        "ebay": "https://www.ebay.it/sch/i.html?_nkw=Asus+TUF+Gaming+B850+Plus&LH_BIN=1&LH_ItemCondition=1000",
+        "bpm_power": "https://www.bpm-power.com/it/online?k=Asus+TUF+Gaming+B850+Plus"
       }
     },
     {
       "id": "msi_mag_a750",
       "nome": "MSI MAG A750BN (750W)",
       "soglia_prezzo": 75.0,
+      "prezzo_min_atteso": 60,
       "parole_chiave": ["mag a750"],
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=MSI+MAG+A750+alimentatore",
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=MSI+MAG+A750+alimentatore",
-        "bpm_power": "https://www.bpm-power.com/it/online?q=MSI+MAG+A750"
+        "ebay": "https://www.ebay.it/sch/i.html?_nkw=MSI+MAG+A750+alimentatore&LH_BIN=1&LH_ItemCondition=1000",
+        "bpm_power": "https://www.bpm-power.com/it/online?k=MSI+MAG+A750"
       }
     },
     {
       "id": "ram_ddr5_32gb",
       "nome": "RAM DDR5 32GB (2x16GB)",
       "soglia_prezzo": 90.0,
+      "prezzo_min_atteso": 70,
       "parole_chiave": ["ddr5", "32gb"],
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=RAM+DDR5+32GB+2x16GB",
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=RAM+DDR5+32GB+2x16GB",
-        "bpm_power": "https://www.bpm-power.com/it/online?q=RAM+DDR5+32GB"
+        "ebay": "https://www.ebay.it/sch/i.html?_nkw=RAM+DDR5+32GB+2x16GB&LH_BIN=1&LH_ItemCondition=1000",
+        "bpm_power": "https://www.bpm-power.com/it/online?k=RAM+DDR5+32GB"
       }
     }
   ]
