@@ -1,0 +1,36 @@
+{
+  "cpu": {
+    "nome": "AMD Ryzen 7 7800X3D",
+    "socket": "AM5",
+    "tipo_ram": "DDR5",
+    "tdp_watt": 120
+  },
+  "scheda_madre": {
+    "nome": "Asus TUF Gaming B850-Plus",
+    "socket": "AM5",
+    "tipo_ram": "DDR5",
+    "supporta_pcie5_m2": true
+  },
+  "gpu": {
+    "nome": "AMD Radeon RX 9070",
+    "tdp_watt": 220,
+    "connettori_richiesti": "8-pin PCIe (o adattatore)"
+  },
+  "dissipatore": {
+    "nome": "Arctic Liquid Freezer III Pro 360",
+    "socket_supportati": ["AM5", "AM4", "LGA1700", "LGA1851"],
+    "radiatore_mm": 360
+  },
+  "ssd": {
+    "nome": "Acer Predator GM7 1TB",
+    "interfaccia": "M.2 NVMe PCIe4/5"
+  },
+  "ram": {
+    "nome": "RAM DDR5 32GB (2x16GB)",
+    "tipo": "DDR5"
+  },
+  "alimentatore": {
+    "nome": "MSI MAG A750BN",
+    "watt": 750
+  }
+}
