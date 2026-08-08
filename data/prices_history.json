@@ -1,1 +1,10 @@
-{}
+{
+  "ryzen7_7800x3d": {
+    "nome": "AMD Ryzen 7 7800X3D",
+    "prezzi": []
+  },
+  "rx_9070": {
+    "nome": "AMD Radeon RX 9070",
+    "prezzi": []
+  }
+}

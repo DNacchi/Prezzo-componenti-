@@ -1,5 +1,79 @@
 <!DOCTYPE html>
 <html lang="it">
-<head><meta charset="UTF-8"><title>Monitor Prezzi PC</title></head>
-<body><p>Dashboard non ancora generata. Esegui il workflow per la prima volta.</p></body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monitor Prezzi PC</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #0f1115;
+    color: #e8e8e8;
+    margin: 0;
+    padding: 24px 16px;
+  }
+  h1 { font-size: 1.4rem; margin-bottom: 4px; }
+  .subtitle { color: #999; font-size: 0.85rem; margin-bottom: 24px; }
+  .card {
+    background: #1a1d24;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .card h2 { font-size: 1.1rem; margin: 0 0 4px 0; }
+  .price-now { font-size: 1.8rem; font-weight: 700; color: #4ade80; margin: 4px 0; }
+  .price-meta { font-size: 0.8rem; color: #888; margin-bottom: 12px; }
+  .no-data { color: #888; font-style: italic; }
+  canvas { max-height: 220px; }
+</style>
+</head>
+<body>
+  <h1>💻 Monitor Prezzi Componenti PC</h1>
+  <div class="subtitle">Ultimo aggiornamento: 08/08/2026 15:03 UTC</div>
+  
+<div class="card">
+  <h2>AMD Ryzen 7 7800X3D</h2>
+  <div class="no-data">Nessun dato ancora</div>
+  <canvas id="chart_ryzen7_7800x3d"></canvas>
+</div>
+
+
+<div class="card">
+  <h2>AMD Radeon RX 9070</h2>
+  <div class="no-data">Nessun dato ancora</div>
+  <canvas id="chart_rx_9070"></canvas>
+</div>
+
+  <script>
+    const chartData = {"ryzen7_7800x3d": {"labels": [], "prices": []}, "rx_9070": {"labels": [], "prices": []}};
+    Object.entries(chartData).forEach(([id, d]) => {
+      const ctx = document.getElementById('chart_' + id);
+      if (!ctx) return;
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: d.labels,
+          datasets: [{
+            label: 'Prezzo (EUR)',
+            data: d.prices,
+            borderColor: '#4ade80',
+            backgroundColor: 'rgba(74,222,128,0.1)',
+            tension: 0.2,
+            fill: true,
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: '#888' }, grid: { color: '#2a2d35' } },
+            y: { ticks: { color: '#888' }, grid: { color: '#2a2d35' } }
+          }
+        }
+      });
+    });
+  </script>
+</body>
 </html>
