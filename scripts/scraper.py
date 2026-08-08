@@ -1,13 +1,14 @@
+
 """
 Scraper prezzi componenti PC - versione multi-fonte.
 
 Ogni funzione 'scrape_<fonte>' prende una URL e restituisce il prezzo piu'
 basso trovato (float) oppure None se non riesce a estrarlo.
 
-NOTA: i siti cambiano struttura HTML periodicamente e alcuni (Amazon in
-primis) bloccano attivamente lo scraping. Se una fonte smette di
-funzionare, il resto continua a girare normalmente: si prende il prezzo
-migliore tra tutte le fonti che hanno risposto.
+NOTA: i siti cambiano struttura HTML periodicamente e alcuni bloccano
+attivamente lo scraping (in particolare dagli IP dei server GitHub Actions).
+Se una fonte smette di funzionare, il resto continua a girare normalmente:
+si prende il prezzo migliore tra tutte le fonti che hanno risposto.
 """
 
 import argparse
@@ -35,9 +36,6 @@ HEADERS = {
     "Referer": "https://www.google.com/",
     "Connection": "keep-alive",
     "Upgrade-Insecure-Requests": "1",
-    "Sec-Fetch-Dest": "document",
-    "Sec-Fetch-Mode": "navigate",
-    "Sec-Fetch-Site": "cross-site",
 }
 
 REQUEST_TIMEOUT = 20
@@ -46,14 +44,11 @@ DELAY_BETWEEN_REQUESTS = 4
 SESSION = requests.Session()
 SESSION.headers.update(HEADERS)
 
-# Range di sanita': scarta prezzi palesemente sbagliati (es. "12" o
-# "999999" catturati per errore da un pattern regex troppo largo)
 PREZZO_MIN_RAGIONEVOLE = 50
 PREZZO_MAX_RAGIONEVOLE = 3000
 
 
 def _parse_price_it(text):
-    """Converte '1.234,56 €' oppure '349,00€' in float 1234.56 / 349.00."""
     if not text:
         return None
     match = re.search(r"(\d{1,3}(?:\.\d{3})*(?:,\d{2})?)", text)
@@ -71,6 +66,11 @@ def _prezzi_ragionevoli(prices):
 
 
 def scrape_trovaprezzi(url):
+    """
+    NOTA: Trovaprezzi blocca sistematicamente gli IP dei server GitHub
+    Actions con 403 Forbidden. Questa funzione resta qui per completezza
+    ma va considerata inaffidabile finche' non si usa un proxy a pagamento.
+    """
     try:
         SESSION.get("https://www.trovaprezzi.it/", timeout=REQUEST_TIMEOUT)
         time.sleep(1)
@@ -98,32 +98,58 @@ def scrape_trovaprezzi(url):
 
 
 def scrape_amazon(url):
+    """
+    Cerca SOLO dentro i veri blocchi risultato di ricerca
+    (div[data-component-type="s-search-result"]), non in tutta la pagina,
+    per evitare di catturare prezzi di banner pubblicitari o widget
+    scorrelati dal prodotto cercato.
+    """
     resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
     if resp.status_code != 200:
         return None
     soup = BeautifulSoup(resp.text, "html.parser")
 
     prices = []
-    for el in soup.select(".a-price .a-offscreen"):
-        p = _parse_price_it(el.get_text())
-        if p:
-            prices.append(p)
+    result_cards = soup.select('div[data-component-type="s-search-result"]')
+    for card in result_cards:
+        el = card.select_one(".a-price .a-offscreen")
+        if el:
+            p = _parse_price_it(el.get_text())
+            if p:
+                prices.append(p)
 
     prices = _prezzi_ragionevoli(prices)
     return min(prices) if prices else None
 
 
 def scrape_ebay(url):
+    """
+    eBay cambia spesso le classi CSS dei risultati. Proviamo piu' selettori
+    noti, poi un fallback regex generico su pattern di prezzo in euro
+    dentro i blocchi risultato (evitando l'header/footer di pagina).
+    """
     resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
     if resp.status_code != 200:
         return None
     soup = BeautifulSoup(resp.text, "html.parser")
 
     prices = []
-    for el in soup.select(".s-item__price"):
-        p = _parse_price_it(el.get_text())
-        if p:
-            prices.append(p)
+    for selector in [".s-item__price", ".s-card__price", "span.s-card__price"]:
+        for el in soup.select(selector):
+            p = _parse_price_it(el.get_text())
+            if p:
+                prices.append(p)
+        if prices:
+            break
+
+    if not prices:
+        for item in soup.select("li.s-item, li.s-card, div.s-card"):
+            text = item.get_text(" ", strip=True)
+            m = re.search(r"(\d{1,3}(?:\.\d{3})*,\d{2})\s*€", text)
+            if m:
+                p = _parse_price_it(m.group(1))
+                if p:
+                    prices.append(p)
 
     prices = _prezzi_ragionevoli(prices)
     return min(prices) if prices else None
