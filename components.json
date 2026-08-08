@@ -8,7 +8,8 @@
       "fonti": {
         "trovaprezzi": "https://www.trovaprezzi.it/cerca.aspx?libera=AMD+Ryzen+7+7800X3D",
         "ebay": "https://www.ebay.it/sch/i.html?_nkw=AMD+Ryzen+7+7800X3D",
-        "amazon": "https://www.amazon.it/s?k=AMD+Ryzen+7+7800X3D"
+        "amazon": "https://www.amazon.it/s?k=AMD+Ryzen+7+7800X3D",
+        "bpm_power": "https://www.bpm-power.com/it/online?q=AMD+Ryzen+7+7800X3D"
       }
     },
     {
@@ -19,7 +20,63 @@
       "fonti": {
         "trovaprezzi": "https://www.trovaprezzi.it/cerca.aspx?libera=Radeon+RX+9070",
         "ebay": "https://www.ebay.it/sch/i.html?_nkw=AMD+Radeon+RX+9070",
-        "amazon": "https://www.amazon.it/s?k=AMD+Radeon+RX+9070"
+        "amazon": "https://www.amazon.it/s?k=AMD+Radeon+RX+9070",
+        "bpm_power": "https://www.bpm-power.com/it/online?q=Radeon+RX+9070"
+      }
+    },
+    {
+      "id": "arctic_lf3_pro_360",
+      "nome": "Arctic Liquid Freezer III Pro 360",
+      "soglia_prezzo": 110.0,
+      "parole_chiave": ["liquid freezer", "360"],
+      "fonti": {
+        "amazon": "https://www.amazon.it/s?k=Arctic+Liquid+Freezer+III+Pro+360",
+        "ebay": "https://www.ebay.it/sch/i.html?_nkw=Arctic+Liquid+Freezer+III+Pro+360",
+        "bpm_power": "https://www.bpm-power.com/it/online?q=Arctic+Liquid+Freezer+III+Pro+360"
+      }
+    },
+    {
+      "id": "ssd_predator_gm7_1tb",
+      "nome": "Acer Predator GM7 1TB",
+      "soglia_prezzo": 70.0,
+      "parole_chiave": ["gm7", "1tb"],
+      "fonti": {
+        "amazon": "https://www.amazon.it/s?k=Predator+GM7+1TB+SSD",
+        "ebay": "https://www.ebay.it/sch/i.html?_nkw=Predator+GM7+1TB+SSD",
+        "bpm_power": "https://www.bpm-power.com/it/online?q=Predator+GM7+1TB"
+      }
+    },
+    {
+      "id": "asus_tuf_b850_plus",
+      "nome": "Asus TUF Gaming B850-Plus",
+      "soglia_prezzo": 190.0,
+      "parole_chiave": ["tuf", "b850"],
+      "fonti": {
+        "amazon": "https://www.amazon.it/s?k=Asus+TUF+Gaming+B850+Plus",
+        "ebay": "https://www.ebay.it/sch/i.html?_nkw=Asus+TUF+Gaming+B850+Plus",
+        "bpm_power": "https://www.bpm-power.com/it/online?q=Asus+TUF+Gaming+B850+Plus"
+      }
+    },
+    {
+      "id": "msi_mag_a750",
+      "nome": "MSI MAG A750BN (750W)",
+      "soglia_prezzo": 75.0,
+      "parole_chiave": ["mag a750"],
+      "fonti": {
+        "amazon": "https://www.amazon.it/s?k=MSI+MAG+A750+alimentatore",
+        "ebay": "https://www.ebay.it/sch/i.html?_nkw=MSI+MAG+A750+alimentatore",
+        "bpm_power": "https://www.bpm-power.com/it/online?q=MSI+MAG+A750"
+      }
+    },
+    {
+      "id": "ram_ddr5_32gb",
+      "nome": "RAM DDR5 32GB (2x16GB)",
+      "soglia_prezzo": 90.0,
+      "parole_chiave": ["ddr5", "32gb"],
+      "fonti": {
+        "amazon": "https://www.amazon.it/s?k=RAM+DDR5+32GB+2x16GB",
+        "ebay": "https://www.ebay.it/sch/i.html?_nkw=RAM+DDR5+32GB+2x16GB",
+        "bpm_power": "https://www.bpm-power.com/it/online?q=RAM+DDR5+32GB"
       }
     }
   ]
