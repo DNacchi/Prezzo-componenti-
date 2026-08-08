@@ -1,14 +1,11 @@
 
 """
-Scraper prezzi componenti PC - versione multi-fonte.
+Scraper prezzi componenti PC - versione multi-fonte con verifica titolo.
 
-Ogni funzione 'scrape_<fonte>' prende una URL e restituisce il prezzo piu'
-basso trovato (float) oppure None se non riesce a estrarlo.
-
-NOTA: i siti cambiano struttura HTML periodicamente e alcuni bloccano
-attivamente lo scraping (in particolare dagli IP dei server GitHub Actions).
-Se una fonte smette di funzionare, il resto continua a girare normalmente:
-si prende il prezzo migliore tra tutte le fonti che hanno risposto.
+Ogni funzione 'scrape_<fonte>' prende una URL e una lista di parole chiave,
+e restituisce il prezzo piu' basso TRA I PRODOTTI IL CUI TITOLO CONTIENE
+TUTTE LE PAROLE CHIAVE (case-insensitive). Questo evita di scambiare
+accessori/prodotti correlati per il componente cercato.
 """
 
 import argparse
@@ -65,11 +62,17 @@ def _prezzi_ragionevoli(prices):
     return [p for p in prices if PREZZO_MIN_RAGIONEVOLE <= p <= PREZZO_MAX_RAGIONEVOLE]
 
 
-def scrape_trovaprezzi(url):
+def _titolo_corrisponde(titolo, parole_chiave):
+    if not titolo or not parole_chiave:
+        return False
+    titolo_lower = titolo.lower()
+    return all(kw.lower() in titolo_lower for kw in parole_chiave)
+
+
+def scrape_trovaprezzi(url, parole_chiave):
     """
     NOTA: Trovaprezzi blocca sistematicamente gli IP dei server GitHub
-    Actions con 403 Forbidden. Questa funzione resta qui per completezza
-    ma va considerata inaffidabile finche' non si usa un proxy a pagamento.
+    Actions con 403 Forbidden. Inaffidabile finche' non si usa un proxy.
     """
     try:
         SESSION.get("https://www.trovaprezzi.it/", timeout=REQUEST_TIMEOUT)
@@ -82,14 +85,13 @@ def scrape_trovaprezzi(url):
     soup = BeautifulSoup(resp.text, "html.parser")
 
     prices = []
-    for el in soup.select(".listing_item .prezzo, .prod_price, .price"):
-        p = _parse_price_it(el.get_text())
-        if p:
-            prices.append(p)
-
-    if not prices:
-        for m in re.finditer(r"(\d{1,3}(?:\.\d{3})*,\d{2})\s*€", resp.text):
-            p = _parse_price_it(m.group(1))
+    for item in soup.select(".listing_item"):
+        titolo = item.get_text(" ", strip=True)
+        if not _titolo_corrisponde(titolo, parole_chiave):
+            continue
+        prezzo_el = item.select_one(".prezzo, .prod_price, .price")
+        if prezzo_el:
+            p = _parse_price_it(prezzo_el.get_text())
             if p:
                 prices.append(p)
 
@@ -97,12 +99,10 @@ def scrape_trovaprezzi(url):
     return min(prices) if prices else None
 
 
-def scrape_amazon(url):
+def scrape_amazon(url, parole_chiave):
     """
-    Cerca SOLO dentro i veri blocchi risultato di ricerca
-    (div[data-component-type="s-search-result"]), non in tutta la pagina,
-    per evitare di catturare prezzi di banner pubblicitari o widget
-    scorrelati dal prodotto cercato.
+    Verifica che il titolo di ogni risultato contenga le parole chiave
+    prima di considerarne il prezzo, per scartare accessori correlati.
     """
     resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
     if resp.status_code != 200:
@@ -112,9 +112,13 @@ def scrape_amazon(url):
     prices = []
     result_cards = soup.select('div[data-component-type="s-search-result"]')
     for card in result_cards:
-        el = card.select_one(".a-price .a-offscreen")
-        if el:
-            p = _parse_price_it(el.get_text())
+        titolo_el = card.select_one("h2")
+        titolo = titolo_el.get_text(" ", strip=True) if titolo_el else ""
+        if not _titolo_corrisponde(titolo, parole_chiave):
+            continue
+        prezzo_el = card.select_one(".a-price .a-offscreen")
+        if prezzo_el:
+            p = _parse_price_it(prezzo_el.get_text())
             if p:
                 prices.append(p)
 
@@ -122,11 +126,9 @@ def scrape_amazon(url):
     return min(prices) if prices else None
 
 
-def scrape_ebay(url):
+def scrape_ebay(url, parole_chiave):
     """
-    eBay cambia spesso le classi CSS dei risultati. Proviamo piu' selettori
-    noti, poi un fallback regex generico su pattern di prezzo in euro
-    dentro i blocchi risultato (evitando l'header/footer di pagina).
+    Stesso principio: titolo dell'annuncio deve contenere le parole chiave.
     """
     resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
     if resp.status_code != 200:
@@ -134,22 +136,21 @@ def scrape_ebay(url):
     soup = BeautifulSoup(resp.text, "html.parser")
 
     prices = []
-    for selector in [".s-item__price", ".s-card__price", "span.s-card__price"]:
-        for el in soup.select(selector):
-            p = _parse_price_it(el.get_text())
-            if p:
-                prices.append(p)
-        if prices:
-            break
+    for item in soup.select("li.s-item, li.s-card, div.s-card"):
+        titolo_el = item.select_one(".s-item__title, .s-card__title")
+        titolo = titolo_el.get_text(" ", strip=True) if titolo_el else item.get_text(" ", strip=True)
+        if not _titolo_corrisponde(titolo, parole_chiave):
+            continue
 
-    if not prices:
-        for item in soup.select("li.s-item, li.s-card, div.s-card"):
-            text = item.get_text(" ", strip=True)
-            m = re.search(r"(\d{1,3}(?:\.\d{3})*,\d{2})\s*€", text)
-            if m:
-                p = _parse_price_it(m.group(1))
-                if p:
-                    prices.append(p)
+        prezzo_el = item.select_one(".s-item__price, .s-card__price")
+        if prezzo_el:
+            p = _parse_price_it(prezzo_el.get_text())
+        else:
+            m = re.search(r"(\d{1,3}(?:\.\d{3})*,\d{2})\s*€", titolo)
+            p = _parse_price_it(m.group(1)) if m else None
+
+        if p:
+            prices.append(p)
 
     prices = _prezzi_ragionevoli(prices)
     return min(prices) if prices else None
@@ -189,6 +190,7 @@ def run(debug=False):
 
     for comp in components:
         comp_id = comp["id"]
+        parole_chiave = comp.get("parole_chiave", [])
         history.setdefault(comp_id, {"nome": comp["nome"], "prezzi": []})
 
         best_price = None
@@ -200,7 +202,7 @@ def run(debug=False):
                 print(f"[WARN] nessuno scraper per la fonte '{source_name}'")
                 continue
             try:
-                price = scraper_fn(url)
+                price = scraper_fn(url, parole_chiave)
             except Exception as e:
                 print(f"[ERRORE] {comp_id} / {source_name}: {e}")
                 price = None
