@@ -1,0 +1,20 @@
+{
+  "components": [
+    {
+      "id": "ryzen7_7800x3d",
+      "nome": "AMD Ryzen 7 7800X3D",
+      "soglia_prezzo": 350.0,
+      "fonti": {
+        "trovaprezzi": "https://www.trovaprezzi.it/cerca.aspx?libera=AMD+Ryzen+7+7800X3D"
+      }
+    },
+    {
+      "id": "rx_9070",
+      "nome": "AMD Radeon RX 9070",
+      "soglia_prezzo": 600.0,
+      "fonti": {
+        "trovaprezzi": "https://www.trovaprezzi.it/cerca.aspx?libera=Radeon+RX+9070"
+      }
+    }
+  ]
+}
