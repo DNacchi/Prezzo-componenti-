@@ -166,31 +166,67 @@ def scrape_ebay(url, parole_chiave, prezzo_min):
     return min(prices) if prices else None
 
 
-def scrape_bpm_power(url, parole_chiave, prezzo_min):
+def scrape_bpm_power(termine_ricerca, parole_chiave, prezzo_min):
     """
-    BPM-power carica i prodotti via JavaScript. Prova a chiudere il banner
-    cookie (che spesso blocca il caricamento contenuti), poi selettori CSS
-    specifici, poi fallback su tutto il testo della pagina.
+    BPM-power non ha una pagina di ricerca raggiungibile via URL diretto:
+    la ricerca e' gestita via JavaScript. Simuliamo l'uso reale della
+    barra di ricerca: apriamo la home, troviamo il campo, digitiamo il
+    termine, premiamo invio, aspettiamo i risultati.
     """
     page = _get_playwright_page()
     try:
-        page.goto(url, wait_until="networkidle", timeout=30000)
+        page.goto("https://www.bpm-power.com/it/", wait_until="networkidle", timeout=30000)
 
         for testo_bottone in ["Accetta tutti", "Accetta", "Accept all", "Accetto"]:
             try:
                 bottone = page.get_by_text(testo_bottone, exact=False).first
                 if bottone.is_visible(timeout=2000):
                     bottone.click(timeout=2000)
-                    print(f"  [bpm_power debug] cliccato banner cookie: '{testo_bottone}'")
-                    page.wait_for_timeout(1000)
+                    page.wait_for_timeout(800)
                     break
             except Exception:
                 continue
 
+        campo_ricerca = None
+        for selettore in [
+            "input[type='search']",
+            "input[placeholder*='erca']",
+            "input[name*='search']",
+            "#search",
+            ".search-input input",
+        ]:
+            try:
+                el = page.locator(selettore).first
+                if el.is_visible(timeout=1500):
+                    campo_ricerca = el
+                    break
+            except Exception:
+                continue
+
+        if campo_ricerca is None:
+            try:
+                lente = page.get_by_role("button", name=re.compile("cerca", re.I)).first
+                lente.click(timeout=2000)
+                page.wait_for_timeout(500)
+                for selettore in ["input[type='search']", "input[placeholder*='erca']"]:
+                    el = page.locator(selettore).first
+                    if el.is_visible(timeout=1500):
+                        campo_ricerca = el
+                        break
+            except Exception:
+                pass
+
+        if campo_ricerca is None:
+            print("  [bpm_power debug] campo di ricerca non trovato, salto questa fonte")
+            return None
+
+        campo_ricerca.click(timeout=2000)
+        campo_ricerca.fill(termine_ricerca)
+        campo_ricerca.press("Enter")
         page.wait_for_load_state("networkidle", timeout=15000)
         page.wait_for_timeout(2000)
     except Exception as e:
-        print(f"  [bpm_power debug] errore caricamento pagina: {e}")
+        print(f"  [bpm_power debug] errore durante la ricerca: {e}")
         return None
 
     html = page.content()
