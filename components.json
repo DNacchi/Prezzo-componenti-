@@ -13,20 +13,20 @@
       }
     },
     {
-      "id": "rx_9070",
-      "nome": "AMD Radeon RX 9070",
-      "soglia_prezzo": 600.0,
-      "prezzo_min_atteso": 450,
-      "parole_chiave": ["9070"],
+      "id": "rx_9070_xt",
+      "nome": "AMD Radeon RX 9070 XT",
+      "soglia_prezzo": 700.0,
+      "prezzo_min_atteso": 550,
+      "parole_chiave": ["9070", "xt"],
       "fonti": {
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=AMD+Radeon+RX+9070&LH_BIN=1&LH_ItemCondition=1000",
-        "amazon": "https://www.amazon.it/s?k=AMD+Radeon+RX+9070",
-        "bpm_power": "Radeon RX 9070"
+        "ebay": "https://www.ebay.it/sch/i.html?_nkw=AMD+Radeon+RX+9070+XT&LH_BIN=1&LH_ItemCondition=1000",
+        "amazon": "https://www.amazon.it/s?k=AMD+Radeon+RX+9070+XT",
+        "bpm_power": "Radeon RX 9070 XT"
       }
     },
     {
       "id": "arctic_lf3_pro_360",
-      "nome": "Arctic Liquid Freezer III Pro 360",
+      "nome": "Arctic Liquid Freezer III Pro 360 (AIO)",
       "soglia_prezzo": 110.0,
       "prezzo_min_atteso": 90,
       "parole_chiave": ["liquid freezer", "360"],
@@ -34,6 +34,30 @@
         "amazon": "https://www.amazon.it/s?k=Arctic+Liquid+Freezer+III+Pro+360",
         "ebay": "https://www.ebay.it/sch/i.html?_nkw=Arctic+Liquid+Freezer+III+Pro+360&LH_BIN=1&LH_ItemCondition=1000",
         "bpm_power": "Arctic Liquid Freezer III Pro 360"
+      }
+    },
+    {
+      "id": "thermalright_paa120se",
+      "nome": "Thermalright Peerless Assassin 120 SE (aria)",
+      "soglia_prezzo": 45.0,
+      "prezzo_min_atteso": 25,
+      "parole_chiave": ["peerless assassin"],
+      "fonti": {
+        "amazon": "https://www.amazon.it/s?k=Thermalright+Peerless+Assassin+120+SE",
+        "ebay": "https://www.ebay.it/sch/i.html?_nkw=Thermalright+Peerless+Assassin+120+SE&LH_BIN=1&LH_ItemCondition=1000",
+        "bpm_power": "Thermalright Peerless Assassin 120 SE"
+      }
+    },
+    {
+      "id": "deepcool_ak620",
+      "nome": "DeepCool AK620 (aria)",
+      "soglia_prezzo": 60.0,
+      "prezzo_min_atteso": 35,
+      "parole_chiave": ["ak620"],
+      "fonti": {
+        "amazon": "https://www.amazon.it/s?k=DeepCool+AK620",
+        "ebay": "https://www.ebay.it/sch/i.html?_nkw=DeepCool+AK620&LH_BIN=1&LH_ItemCondition=1000",
+        "bpm_power": "DeepCool AK620"
       }
     },
     {
