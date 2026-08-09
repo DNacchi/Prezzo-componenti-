@@ -98,10 +98,10 @@
     },
     {
       "id": "ram_ddr5_32gb",
-      "nome": "RAM DDR5 32GB (2x16GB)",
+      "nome": "RAM DDR5 32GB (2x16GB) 6000MHz",
       "soglia_prezzo": 90.0,
       "prezzo_min_atteso": 70,
-      "parole_chiave": ["ddr5", "32gb"],
+      "parole_chiave": ["ddr5", "32gb", "6000MHz"],
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=RAM+DDR5+32GB+2x16GB",
         "ebay": "https://www.ebay.it/sch/i.html?_nkw=RAM+DDR5+32GB+2x16GB&LH_BIN=1&LH_ItemCondition=1000",
