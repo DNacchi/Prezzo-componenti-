@@ -1,6 +1,10 @@
 """
 Scraper prezzi componenti PC - versione multi-fonte con verifica titolo,
-soglia minima per componente, e supporto siti JS-rendered (Playwright).
+soglia minima per componente, link diretto al prodotto trovato, e
+supporto siti JS-rendered (Playwright).
+
+Ogni scrape_* ora restituisce una TUPLA (prezzo, url_prodotto) invece del
+solo prezzo, cosi' la dashboard puo' linkare direttamente all'offerta.
 """
 
 import argparse
@@ -9,6 +13,7 @@ import re
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urljoin
 
 import requests
 from bs4 import BeautifulSoup
@@ -79,8 +84,8 @@ def _parse_price_it(text):
         return None
 
 
-def _prezzi_ragionevoli(prices, prezzo_min=20):
-    return [p for p in prices if prezzo_min <= p <= PREZZO_MAX_RAGIONEVOLE]
+def _prezzo_ragionevole(p, prezzo_min=20):
+    return p is not None and prezzo_min <= p <= PREZZO_MAX_RAGIONEVOLE
 
 
 def _titolo_corrisponde(titolo, parole_chiave):
@@ -90,13 +95,21 @@ def _titolo_corrisponde(titolo, parole_chiave):
     return all(kw.lower() in titolo_lower for kw in parole_chiave)
 
 
+def _migliore(candidati):
+    """candidati: lista di tuple (prezzo, url). Ritorna la tupla col prezzo piu' basso."""
+    if not candidati:
+        return None, None
+    prezzo, url = min(candidati, key=lambda c: c[0])
+    return prezzo, url
+
+
 def scrape_amazon(url, parole_chiave, prezzo_min):
     resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
     if resp.status_code != 200:
-        return None
+        return None, None
     soup = BeautifulSoup(resp.text, "html.parser")
 
-    prices = []
+    candidati = []
     result_cards = soup.select('div[data-component-type="s-search-result"]')
     for card in result_cards:
         titolo_el = card.select_one("h2")
@@ -104,22 +117,27 @@ def scrape_amazon(url, parole_chiave, prezzo_min):
         if not _titolo_corrisponde(titolo, parole_chiave):
             continue
         prezzo_el = card.select_one(".a-price .a-offscreen")
-        if prezzo_el:
-            p = _parse_price_it(prezzo_el.get_text())
-            if p:
-                prices.append(p)
+        if not prezzo_el:
+            continue
+        p = _parse_price_it(prezzo_el.get_text())
+        if not _prezzo_ragionevole(p, prezzo_min):
+            continue
 
-    prices = _prezzi_ragionevoli(prices, prezzo_min)
-    return min(prices) if prices else None
+        link_el = card.select_one("h2 a") or card.select_one("a.a-link-normal")
+        prod_url = urljoin("https://www.amazon.it", link_el["href"]) if link_el and link_el.get("href") else url
+
+        candidati.append((p, prod_url))
+
+    return _migliore(candidati)
 
 
 def scrape_ebay(url, parole_chiave, prezzo_min):
     resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
     if resp.status_code != 200:
-        return None
+        return None, None
     soup = BeautifulSoup(resp.text, "html.parser")
 
-    prices = []
+    candidati = []
     for item in soup.select("li.s-item, li.s-card, div.s-card"):
         titolo_el = item.select_one(".s-item__title, .s-card__title")
         titolo = titolo_el.get_text(" ", strip=True) if titolo_el else item.get_text(" ", strip=True)
@@ -133,19 +151,21 @@ def scrape_ebay(url, parole_chiave, prezzo_min):
             m = re.search(r"(\d{1,3}(?:\.\d{3})*,\d{2})\s*€", titolo)
             p = _parse_price_it(m.group(1)) if m else None
 
-        if p:
-            prices.append(p)
+        if not _prezzo_ragionevole(p, prezzo_min):
+            continue
 
-    prices = _prezzi_ragionevoli(prices, prezzo_min)
-    return min(prices) if prices else None
+        link_el = item.select_one("a[href]")
+        prod_url = link_el["href"] if link_el and link_el.get("href") else url
+
+        candidati.append((p, prod_url))
+
+    return _migliore(candidati)
 
 
 def scrape_bpm_power(termine_ricerca, parole_chiave, prezzo_min):
     """
     BPM-power non ha una pagina di ricerca raggiungibile via URL diretto:
-    la ricerca e' gestita via JavaScript. Simuliamo l'uso reale della
-    barra di ricerca: apriamo la home, troviamo il campo, digitiamo il
-    termine, premiamo invio, aspettiamo i risultati.
+    simuliamo l'uso reale della barra di ricerca.
     """
     page = _get_playwright_page()
     try:
@@ -192,7 +212,7 @@ def scrape_bpm_power(termine_ricerca, parole_chiave, prezzo_min):
 
         if campo_ricerca is None:
             print("  [bpm_power debug] campo di ricerca non trovato, salto questa fonte")
-            return None
+            return None, None
 
         campo_ricerca.click(timeout=2000)
         campo_ricerca.fill(termine_ricerca)
@@ -201,47 +221,47 @@ def scrape_bpm_power(termine_ricerca, parole_chiave, prezzo_min):
         page.wait_for_timeout(2000)
     except Exception as e:
         print(f"  [bpm_power debug] errore durante la ricerca: {e}")
-        return None
+        return None, None
 
+    pagina_risultati_url = page.url
     html = page.content()
     soup = BeautifulSoup(html, "html.parser")
 
-    testo_pagina = soup.get_text(" ", strip=True)
-    print(f"  [bpm_power debug] lunghezza testo pagina: {len(testo_pagina)} caratteri")
-    print(f"  [bpm_power debug] anteprima: {testo_pagina[:200]}")
-
-    prices = []
-    candidati = soup.select(
+    candidati = []
+    cards = soup.select(
         ".product-item, .product-card, article.product, .card-product, "
         "li.product, .product-list-item, [class*='product-item']"
     )
-    print(f"  [bpm_power debug] candidati (selettori specifici): {len(candidati)}")
 
-    for card in candidati:
+    for card in cards:
         titolo = card.get_text(" ", strip=True)
         if not _titolo_corrisponde(titolo, parole_chiave):
             continue
         m = re.search(r"(\d{1,3}(?:\.\d{3})*,\d{2})\s*€", titolo)
-        if m:
-            p = _parse_price_it(m.group(1))
-            if p:
-                prices.append(p)
+        if not m:
+            continue
+        p = _parse_price_it(m.group(1))
+        if not _prezzo_ragionevole(p, prezzo_min):
+            continue
 
-    if not prices:
+        link_el = card.select_one("a[href]")
+        prod_url = urljoin("https://www.bpm-power.com", link_el["href"]) if link_el and link_el.get("href") else pagina_risultati_url
+
+        candidati.append((p, prod_url))
+
+    if not candidati:
         testo_completo = soup.get_text("\n", strip=True)
         righe = testo_completo.split("\n")
-        print(f"  [bpm_power debug] fallback: {len(righe)} righe di testo nella pagina")
         for i, riga in enumerate(righe):
             if _titolo_corrisponde(riga, parole_chiave):
                 blocco = " ".join(righe[i:i + 4])
                 m = re.search(r"(\d{1,3}(?:\.\d{3})*,\d{2})\s*€", blocco)
                 if m:
                     p = _parse_price_it(m.group(1))
-                    if p:
-                        prices.append(p)
+                    if _prezzo_ragionevole(p, prezzo_min):
+                        candidati.append((p, pagina_risultati_url))
 
-    prices = _prezzi_ragionevoli(prices, prezzo_min)
-    return min(prices) if prices else None
+    return _migliore(candidati)
 
 
 SCRAPERS = {
@@ -285,6 +305,7 @@ def run(debug=False):
 
             best_price = None
             best_source = None
+            best_url = None
 
             for source_name, url in comp["fonti"].items():
                 scraper_fn = SCRAPERS.get(source_name)
@@ -292,29 +313,35 @@ def run(debug=False):
                     print(f"[WARN] nessuno scraper per la fonte '{source_name}'")
                     continue
                 try:
-                    price = scraper_fn(url, parole_chiave, prezzo_min)
+                    price, prod_url = scraper_fn(url, parole_chiave, prezzo_min)
                 except Exception as e:
                     print(f"[ERRORE] {comp_id} / {source_name}: {e}")
-                    price = None
+                    price, prod_url = None, None
 
                 print(f"{comp['nome']} @ {source_name}: {price}")
 
                 if price is not None and (best_price is None or price < best_price):
                     best_price = price
                     best_source = source_name
+                    best_url = prod_url
 
                 time.sleep(DELAY_BETWEEN_REQUESTS)
 
             if best_price is not None:
                 history[comp_id]["prezzi"].append(
-                    {"data": now, "prezzo": best_price, "fonte": best_source}
+                    {
+                        "data": now,
+                        "prezzo": best_price,
+                        "fonte": best_source,
+                        "url": best_url,
+                    }
                 )
                 print(f"OK  {comp['nome']}: {best_price} EUR ({best_source})")
 
                 if best_price <= comp.get("soglia_prezzo", 0):
                     alerts.append(
                         f"🔔 {comp['nome']} e' sceso a {best_price:.2f} EUR "
-                        f"(soglia: {comp['soglia_prezzo']:.2f} EUR) su {best_source}"
+                        f"(soglia: {comp['soglia_prezzo']:.2f} EUR) su {best_source}\n{best_url}"
                     )
             else:
                 print(f"KO  {comp['nome']}: nessun prezzo trovato su nessuna fonte")
