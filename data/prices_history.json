@@ -75,86 +75,6 @@
       }
     ]
   },
-  "rx_9070": {
-    "nome": "AMD Radeon RX 9070",
-    "prezzi": [
-      {
-        "data": "2026-08-08T16:20:59.936268+00:00",
-        "prezzo": 112.9,
-        "fonte": "amazon"
-      },
-      {
-        "data": "2026-08-08T16:31:05.240181+00:00",
-        "prezzo": 248.27,
-        "fonte": "amazon"
-      },
-      {
-        "data": "2026-08-08T16:46:29.209530+00:00",
-        "prezzo": 497.39,
-        "fonte": "ebay"
-      },
-      {
-        "data": "2026-08-08T17:57:30.831788+00:00",
-        "prezzo": 497.39,
-        "fonte": "ebay"
-      },
-      {
-        "data": "2026-08-08T19:18:59.277380+00:00",
-        "prezzo": 497.39,
-        "fonte": "ebay"
-      },
-      {
-        "data": "2026-08-08T19:50:29.820022+00:00",
-        "prezzo": 497.39,
-        "fonte": "ebay"
-      },
-      {
-        "data": "2026-08-08T19:58:24.498797+00:00",
-        "prezzo": 559.02,
-        "fonte": "amazon"
-      },
-      {
-        "data": "2026-08-08T20:04:11.215767+00:00",
-        "prezzo": 559.02,
-        "fonte": "amazon"
-      },
-      {
-        "data": "2026-08-08T21:04:06.114810+00:00",
-        "prezzo": 559.02,
-        "fonte": "amazon"
-      },
-      {
-        "data": "2026-08-08T22:00:43.689886+00:00",
-        "prezzo": 559.02,
-        "fonte": "amazon"
-      },
-      {
-        "data": "2026-08-08T23:50:20.382930+00:00",
-        "prezzo": 559.02,
-        "fonte": "amazon"
-      },
-      {
-        "data": "2026-08-09T04:42:47.231900+00:00",
-        "prezzo": 503.06,
-        "fonte": "ebay"
-      },
-      {
-        "data": "2026-08-09T07:58:05.246613+00:00",
-        "prezzo": 563.29,
-        "fonte": "ebay"
-      },
-      {
-        "data": "2026-08-09T10:04:13.392084+00:00",
-        "prezzo": 574.96,
-        "fonte": "ebay"
-      },
-      {
-        "data": "2026-08-09T11:53:17.351816+00:00",
-        "prezzo": 563.78,
-        "fonte": "ebay"
-      }
-    ]
-  },
   "arctic_lf3_pro_360": {
     "nome": "Arctic Liquid Freezer III Pro 360",
     "prezzi": [
@@ -365,6 +285,12 @@
         "prezzo": 193.47,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Asus+TUF+Gaming+B850+Plus"
+      },
+      {
+        "data": "2026-08-09T18:45:49.162435+00:00",
+        "prezzo": 193.47,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Asus+TUF+Gaming+B850+Plus"
       }
     ]
   },
@@ -441,6 +367,12 @@
       },
       {
         "data": "2026-08-09T17:18:43.865483+00:00",
+        "prezzo": 98.71,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=MSI+MAG+A750"
+      },
+      {
+        "data": "2026-08-09T18:45:49.162435+00:00",
         "prezzo": 98.71,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=MSI+MAG+A750"
@@ -523,6 +455,12 @@
         "prezzo": 435.21,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=RAM+DDR5+32GB+6000MHz"
+      },
+      {
+        "data": "2026-08-09T18:45:49.162435+00:00",
+        "prezzo": 435.21,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=RAM+DDR5+32GB+6000MHz"
       }
     ]
   },
@@ -549,6 +487,12 @@
       },
       {
         "data": "2026-08-09T17:18:43.865483+00:00",
+        "prezzo": 705.83,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Radeon+RX+9070+XT"
+      },
+      {
+        "data": "2026-08-09T18:45:49.162435+00:00",
         "prezzo": 705.83,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Radeon+RX+9070+XT"
@@ -595,6 +539,12 @@
       },
       {
         "data": "2026-08-09T17:18:43.865483+00:00",
+        "prezzo": 55.55,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=DeepCool+AK620"
+      },
+      {
+        "data": "2026-08-09T18:45:49.162435+00:00",
         "prezzo": 55.55,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=DeepCool+AK620"
