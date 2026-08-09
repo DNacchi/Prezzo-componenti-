@@ -7,7 +7,6 @@
       "prezzo_min_atteso": 250,
       "parole_chiave": ["7800x3d"],
       "fonti": {
-        "trovaprezzi": "https://www.trovaprezzi.it/cerca.aspx?libera=AMD+Ryzen+7+7800X3D",
         "ebay": "https://www.ebay.it/sch/i.html?_nkw=AMD+Ryzen+7+7800X3D&LH_BIN=1&LH_ItemCondition=1000",
         "amazon": "https://www.amazon.it/s?k=AMD+Ryzen+7+7800X3D",
         "bpm_power": "AMD Ryzen 7 7800X3D"
@@ -20,7 +19,6 @@
       "prezzo_min_atteso": 450,
       "parole_chiave": ["9070"],
       "fonti": {
-        "trovaprezzi": "https://www.trovaprezzi.it/cerca.aspx?libera=Radeon+RX+9070",
         "ebay": "https://www.ebay.it/sch/i.html?_nkw=AMD+Radeon+RX+9070&LH_BIN=1&LH_ItemCondition=1000",
         "amazon": "https://www.amazon.it/s?k=AMD+Radeon+RX+9070",
         "bpm_power": "Radeon RX 9070"
