@@ -104,13 +104,40 @@ def _migliore(candidati):
 
 
 def scrape_amazon(url, parole_chiave, prezzo_min):
-    resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
-    if resp.status_code != 200:
+    """
+    Amazon blocca aggressivamente le richieste HTTP semplici. Usiamo
+    Playwright (browser reale headless) per sembrare piu' credibili:
+    navigazione realistica, gestione cookie, rendering JS completo.
+    """
+    page = _get_playwright_page()
+    try:
+        page.goto(url, wait_until="domcontentloaded", timeout=30000)
+
+        for testo_bottone in ["Accetta i cookie", "Accetta cookie", "Accetta", "Accept Cookies"]:
+            try:
+                bottone = page.get_by_text(testo_bottone, exact=False).first
+                if bottone.is_visible(timeout=1500):
+                    bottone.click(timeout=1500)
+                    page.wait_for_timeout(500)
+                    break
+            except Exception:
+                continue
+
+        page.wait_for_timeout(2000)
+    except Exception as e:
+        print(f"  [amazon debug] errore caricamento pagina: {e}")
         return None, None
-    soup = BeautifulSoup(resp.text, "html.parser")
+
+    html = page.content()
+    soup = BeautifulSoup(html, "html.parser")
+
+    testo_pagina = soup.get_text(" ", strip=True)[:150]
+    print(f"  [amazon debug] anteprima pagina: {testo_pagina}")
 
     candidati = []
     result_cards = soup.select('div[data-component-type="s-search-result"]')
+    print(f"  [amazon debug] risultati trovati: {len(result_cards)}")
+
     for card in result_cards:
         titolo_el = card.select_one("h2")
         titolo = titolo_el.get_text(" ", strip=True) if titolo_el else ""
@@ -257,9 +284,20 @@ def save_history(history):
         json.dump(history, f, ensure_ascii=False, indent=2)
 
 
+def pulisci_componenti_rimossi(history, components):
+    """Rimuove dallo storico i componenti non più presenti in components.json."""
+    id_attivi = {c["id"] for c in components}
+    rimossi = [cid for cid in history if cid not in id_attivi]
+    for cid in rimossi:
+        print(f"[pulizia] rimuovo dallo storico componente non più tracciato: {cid}")
+        del history[cid]
+    return history
+
+
 def run(debug=False):
     components = load_components()
     history = load_history()
+    history = pulisci_componenti_rimossi(history, components)
     now = datetime.now(timezone.utc).isoformat()
 
     alerts = []
