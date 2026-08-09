@@ -90,32 +90,6 @@ def _titolo_corrisponde(titolo, parole_chiave):
     return all(kw.lower() in titolo_lower for kw in parole_chiave)
 
 
-def scrape_trovaprezzi(url, parole_chiave, prezzo_min):
-    try:
-        SESSION.get("https://www.trovaprezzi.it/", timeout=REQUEST_TIMEOUT)
-        time.sleep(1)
-    except requests.RequestException:
-        pass
-
-    resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
-    resp.raise_for_status()
-    soup = BeautifulSoup(resp.text, "html.parser")
-
-    prices = []
-    for item in soup.select(".listing_item"):
-        titolo = item.get_text(" ", strip=True)
-        if not _titolo_corrisponde(titolo, parole_chiave):
-            continue
-        prezzo_el = item.select_one(".prezzo, .prod_price, .price")
-        if prezzo_el:
-            p = _parse_price_it(prezzo_el.get_text())
-            if p:
-                prices.append(p)
-
-    prices = _prezzi_ragionevoli(prices, prezzo_min)
-    return min(prices) if prices else None
-
-
 def scrape_amazon(url, parole_chiave, prezzo_min):
     resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
     if resp.status_code != 200:
@@ -271,7 +245,6 @@ def scrape_bpm_power(termine_ricerca, parole_chiave, prezzo_min):
 
 
 SCRAPERS = {
-    "trovaprezzi": scrape_trovaprezzi,
     "amazon": scrape_amazon,
     "ebay": scrape_ebay,
     "bpm_power": scrape_bpm_power,
