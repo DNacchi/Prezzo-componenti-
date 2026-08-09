@@ -26,7 +26,7 @@
     "interfaccia": "M.2 NVMe PCIe4/5"
   },
   "ram": {
-    "nome": "RAM DDR5 32GB (2x16GB)",
+    "nome": "RAM DDR5 32GB (2x16GB) 6000MHz",
     "tipo": "DDR5"
   },
   "alimentatore": {
