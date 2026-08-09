@@ -12,8 +12,8 @@
     "supporta_pcie5_m2": true
   },
   "gpu": {
-    "nome": "AMD Radeon RX 9070",
-    "tdp_watt": 220,
+    "nome": "AMD Radeon RX 9070 XT",
+    "tdp_watt": 260,
     "connettori_richiesti": "8-pin PCIe (o adattatore)"
   },
   "dissipatore": {
@@ -40,3 +40,4 @@
     "psu_max_mm": 250,
     "dissipatore_aria_max_mm": 185
   }
+}
