@@ -96,16 +96,16 @@
         "bpm_power": "MSI MAG A750"
       }
     },
-    {
+      {
       "id": "ram_ddr5_32gb",
       "nome": "RAM DDR5 32GB (2x16GB) 6000MHz",
-      "soglia_prezzo": 90.0,
+      "soglia_prezzo": 130.0,
       "prezzo_min_atteso": 70,
-      "parole_chiave": ["ddr5", "32gb", "6000MHz"],
+      "parole_chiave": ["ddr5", "32gb", "6000"],
       "fonti": {
-        "amazon": "https://www.amazon.it/s?k=RAM+DDR5+32GB+2x16GB",
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=RAM+DDR5+32GB+2x16GB&LH_BIN=1&LH_ItemCondition=1000",
-        "bpm_power": "RAM DDR5 32GB"
+        "amazon": "https://www.amazon.it/s?k=RAM+DDR5+32GB+2x16GB+6000MHz",
+        "ebay": "https://www.ebay.it/sch/i.html?_nkw=RAM+DDR5+32GB+2x16GB+6000MHz&LH_BIN=1&LH_ItemCondition=1000",
+        "bpm_power": "RAM DDR5 32GB 6000MHz"
       }
     }
   ]
