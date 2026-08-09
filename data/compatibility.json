@@ -19,7 +19,17 @@
     {
       "check": "Potenza alimentatore",
       "ok": true,
-      "dettaglio": "Consumo stimato ~440W (CPU 120W + GPU 220W + ~100W resto sistema) su alimentatore da 750W → margine 41% (sufficiente)"
+      "dettaglio": "Consumo stimato ~480W (CPU 120W + GPU 260W + ~100W resto sistema) su alimentatore da 750W → margine 36% (sufficiente)"
+    },
+    {
+      "check": "Radiatore / spazio case",
+      "ok": true,
+      "dettaglio": "Radiatore da 360mm su Corsair FRAME 4500X (supporta fino a 360mm)"
+    },
+    {
+      "check": "Spazio GPU nel case",
+      "ok": true,
+      "dettaglio": "Corsair FRAME 4500X supporta GPU fino a 460mm. Verifica la lunghezza esatta del modello specifico di AMD Radeon RX 9070 XT che acquisti (varia tra i diversi produttori/varianti)."
     },
     {
       "check": "SSD M.2",
@@ -27,5 +37,5 @@
       "dettaglio": "Acer Predator GM7 1TB compatibile con slot M.2 NVMe standard"
     }
   ],
-  "nota": "Controllo automatico su compatibilita' elettrica/socket/RAM. Verifica sempre manualmente ingombro fisico (lunghezza GPU, altezza dissipatore, spazio radiatore) rispetto al tuo case."
+  "nota": "Controllo automatico su compatibilita' elettrica/socket/RAM/ingombro dichiarato. Verifica sempre manualmente le dimensioni esatte del modello specifico che acquisti."
 }
