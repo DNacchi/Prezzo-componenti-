@@ -1,17 +1,6 @@
+
 """
 Controlla la compatibilita' tra i componenti definiti in build.json.
-
-Regole verificate:
-- Socket CPU == Socket scheda madre
-- Tipo RAM CPU/scheda madre == tipo RAM acquistata
-- Dissipatore supporta il socket della CPU
-- Alimentatore ha abbastanza margine di potenza (CPU + GPU + margine sistema)
-- SSD M.2 compatibile con la scheda madre
-
-NOTA: questo NON e' un controllo esaustivo di tutte le compatibilita'
-fisiche possibili (es. ingombro fisico nel case, lunghezza GPU, altezza
-dissipatore per case specifici). Verifica sempre anche le dimensioni
-fisiche rispetto al tuo case.
 """
 
 import json
@@ -77,6 +66,29 @@ def check():
             ),
         })
 
+    case = build.get("case", {})
+    if case.get("radiatore_max_mm") and dissipatore.get("radiatore_mm"):
+        ok = dissipatore["radiatore_mm"] <= case["radiatore_max_mm"]
+        risultati.append({
+            "check": "Radiatore / spazio case",
+            "ok": ok,
+            "dettaglio": (
+                f"Radiatore da {dissipatore['radiatore_mm']}mm su {case.get('nome','case')} "
+                f"(supporta fino a {case['radiatore_max_mm']}mm)"
+            ),
+        })
+
+    if case.get("gpu_max_mm"):
+        risultati.append({
+            "check": "Spazio GPU nel case",
+            "ok": True,
+            "dettaglio": (
+                f"{case.get('nome','Il case')} supporta GPU fino a {case['gpu_max_mm']}mm. "
+                f"Verifica la lunghezza esatta del modello specifico di {gpu.get('nome','scheda video')} "
+                f"che acquisti (varia tra i diversi produttori/varianti)."
+            ),
+        })
+
     if ssd.get("interfaccia") and "PCIe5" in ssd.get("interfaccia", "") and not mobo.get("supporta_pcie5_m2"):
         risultati.append({
             "check": "SSD M.2 PCIe5",
@@ -96,9 +108,8 @@ def check():
         "tutti_compatibili": tutti_ok,
         "controlli": risultati,
         "nota": (
-            "Controllo automatico su compatibilita' elettrica/socket/RAM. "
-            "Verifica sempre manualmente ingombro fisico (lunghezza GPU, "
-            "altezza dissipatore, spazio radiatore) rispetto al tuo case."
+            "Controllo automatico su compatibilita' elettrica/socket/RAM/ingombro dichiarato. "
+            "Verifica sempre manualmente le dimensioni esatte del modello specifico che acquisti."
         ),
     }
 
