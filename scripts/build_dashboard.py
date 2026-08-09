@@ -52,11 +52,23 @@ TEMPLATE = """<!DOCTYPE html>
   .badge {{ display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }}
   .badge-ok {{ background: rgba(74,222,128,0.15); color: #4ade80; }}
   .badge-ko {{ background: rgba(248,113,113,0.15); color: #f87171; }}
+  .total-card {{
+    background: linear-gradient(135deg, #1a1d24, #232733);
+    border: 1px solid #2a2d35;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }}
+  .total-label {{ font-size: 0.9rem; color: #999; margin-bottom: 4px; }}
+  .total-value {{ font-size: 2.4rem; font-weight: 800; color: #4ade80; }}
+  .total-meta {{ font-size: 0.75rem; color: #666; margin-top: 4px; }}
 </style>
 </head>
 <body>
   <h1>💻 Monitor Prezzi Componenti PC</h1>
   <div class="subtitle">Ultimo aggiornamento: {last_update}</div>
+  {total_html}
   {compat_html}
   {cards}
   <script>
@@ -155,6 +167,35 @@ def build_compat_html():
 """
 
 
+def build_total_html(history):
+    totale = 0.0
+    n_componenti = 0
+    n_mancanti = 0
+
+    for comp_data in history.values():
+        prezzi = comp_data.get("prezzi", [])
+        if prezzi:
+            totale += prezzi[-1]["prezzo"]
+            n_componenti += 1
+        else:
+            n_mancanti += 1
+
+    if n_componenti == 0:
+        return ""
+
+    nota_mancanti = (
+        f" · {n_mancanti} componenti senza prezzo ancora" if n_mancanti else ""
+    )
+
+    return f"""
+<div class="total-card">
+  <div class="total-label">Totale build attuale ({n_componenti} componenti)</div>
+  <div class="total-value">{totale:.2f} €</div>
+  <div class="total-meta">Somma dei prezzi più bassi trovati per ciascun componente{nota_mancanti}</div>
+</div>
+"""
+
+
 def build():
     history = {}
     if HISTORY_FILE.exists():
@@ -195,6 +236,7 @@ def build():
 
     html = TEMPLATE.format(
         last_update=datetime.now(timezone.utc).strftime("%d/%m/%Y %H:%M UTC"),
+        total_html=build_total_html(history),
         compat_html=build_compat_html(),
         cards="\n".join(cards_html) if cards_html else '<p class="no-data">Nessun componente monitorato ancora.</p>',
         chart_data_json=json.dumps(chart_data, ensure_ascii=False),
