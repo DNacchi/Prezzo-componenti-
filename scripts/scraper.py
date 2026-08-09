@@ -131,37 +131,6 @@ def scrape_amazon(url, parole_chiave, prezzo_min):
     return _migliore(candidati)
 
 
-def scrape_ebay(url, parole_chiave, prezzo_min):
-    resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
-    if resp.status_code != 200:
-        return None, None
-    soup = BeautifulSoup(resp.text, "html.parser")
-
-    candidati = []
-    for item in soup.select("li.s-item, li.s-card, div.s-card"):
-        titolo_el = item.select_one(".s-item__title, .s-card__title")
-        titolo = titolo_el.get_text(" ", strip=True) if titolo_el else item.get_text(" ", strip=True)
-        if not _titolo_corrisponde(titolo, parole_chiave):
-            continue
-
-        prezzo_el = item.select_one(".s-item__price, .s-card__price")
-        if prezzo_el:
-            p = _parse_price_it(prezzo_el.get_text())
-        else:
-            m = re.search(r"(\d{1,3}(?:\.\d{3})*,\d{2})\s*€", titolo)
-            p = _parse_price_it(m.group(1)) if m else None
-
-        if not _prezzo_ragionevole(p, prezzo_min):
-            continue
-
-        link_el = item.select_one("a[href]")
-        prod_url = link_el["href"] if link_el and link_el.get("href") else url
-
-        candidati.append((p, prod_url))
-
-    return _migliore(candidati)
-
-
 def scrape_bpm_power(termine_ricerca, parole_chiave, prezzo_min):
     """
     BPM-power non ha una pagina di ricerca raggiungibile via URL diretto:
@@ -266,7 +235,6 @@ def scrape_bpm_power(termine_ricerca, parole_chiave, prezzo_min):
 
 SCRAPERS = {
     "amazon": scrape_amazon,
-    "ebay": scrape_ebay,
     "bpm_power": scrape_bpm_power,
 }
 
