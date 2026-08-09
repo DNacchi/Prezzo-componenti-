@@ -1,6 +1,7 @@
 """
 Genera docs/index.html a partire da data/prices_history.json e
-data/compatibility.json.
+data/compatibility.json. Ogni punto del grafico e' cliccabile e apre
+il link al prodotto/prezzo trovato.
 """
 
 import json
@@ -28,7 +29,6 @@ TEMPLATE = """<!DOCTYPE html>
     padding: 24px 16px;
   }}
   h1 {{ font-size: 1.4rem; margin-bottom: 4px; }}
-  h3 {{ font-size: 1rem; margin: 0 0 12px 0; }}
   .subtitle {{ color: #999; font-size: 0.85rem; margin-bottom: 24px; }}
   .card {{
     background: #1a1d24;
@@ -39,9 +39,12 @@ TEMPLATE = """<!DOCTYPE html>
   }}
   .card h2 {{ font-size: 1.1rem; margin: 0 0 4px 0; }}
   .price-now {{ font-size: 1.8rem; font-weight: 700; color: #4ade80; margin: 4px 0; }}
-  .price-meta {{ font-size: 0.8rem; color: #888; margin-bottom: 12px; }}
+  .price-meta {{ font-size: 0.8rem; color: #888; margin-bottom: 4px; }}
+  .price-link {{ font-size: 0.8rem; color: #60a5fa; text-decoration: none; }}
+  .price-link:hover {{ text-decoration: underline; }}
   .no-data {{ color: #888; font-style: italic; }}
-  canvas {{ max-height: 220px; }}
+  canvas {{ max-height: 220px; cursor: pointer; }}
+  .chart-hint {{ font-size: 0.7rem; color: #666; margin-top: 4px; }}
   .compat-ok {{ color: #4ade80; }}
   .compat-ko {{ color: #f87171; }}
   .compat-riga {{ font-size: 0.85rem; margin-bottom: 8px; line-height: 1.4; }}
@@ -61,7 +64,7 @@ TEMPLATE = """<!DOCTYPE html>
     Object.entries(chartData).forEach(([id, d]) => {{
       const ctx = document.getElementById('chart_' + id);
       if (!ctx) return;
-      new Chart(ctx, {{
+      const chart = new Chart(ctx, {{
         type: 'line',
         data: {{
           labels: d.labels,
@@ -72,14 +75,36 @@ TEMPLATE = """<!DOCTYPE html>
             backgroundColor: 'rgba(74,222,128,0.1)',
             tension: 0.2,
             fill: true,
+            pointRadius: 5,
+            pointHoverRadius: 8,
           }}]
         }},
         options: {{
           responsive: true,
-          plugins: {{ legend: {{ display: false }} }},
+          plugins: {{
+            legend: {{ display: false }},
+            tooltip: {{
+              callbacks: {{
+                label: function(ctx) {{
+                  const url = d.urls[ctx.dataIndex];
+                  return url ? 'Prezzo: € ' + ctx.parsed.y + '  (clicca per aprire l\\'offerta)' : 'Prezzo: € ' + ctx.parsed.y;
+                }}
+              }}
+            }}
+          }},
           scales: {{
             x: {{ ticks: {{ color: '#888' }}, grid: {{ color: '#2a2d35' }} }},
             y: {{ ticks: {{ color: '#888' }}, grid: {{ color: '#2a2d35' }} }}
+          }},
+          onClick: function(evt, elements) {{
+            if (elements.length > 0) {{
+              const idx = elements[0].index;
+              const url = d.urls[idx];
+              if (url) window.open(url, '_blank');
+            }}
+          }},
+          onHover: function(evt, elements) {{
+            evt.native.target.style.cursor = elements.length > 0 ? 'pointer' : 'default';
           }}
         }}
       }});
@@ -94,6 +119,7 @@ CARD_TEMPLATE = """
   <h2>{nome}</h2>
   {price_html}
   <canvas id="chart_{id}"></canvas>
+  <div class="chart-hint">👆 clicca un punto del grafico per aprire l'offerta corrispondente</div>
 </div>
 """
 
@@ -144,18 +170,25 @@ def build():
 
         if prezzi:
             last = prezzi[-1]
+            link_html = (
+                f'<a class="price-link" href="{last["url"]}" target="_blank" rel="noopener">Apri offerta ↗</a>'
+                if last.get("url")
+                else ""
+            )
             price_html = (
                 f'<div class="price-now">{last["prezzo"]:.2f} €</div>'
                 f'<div class="price-meta">fonte: {last.get("fonte","?")} · '
                 f'{last["data"][:16].replace("T"," ")}</div>'
+                f'{link_html}'
             )
             labels = [p["data"][:10] for p in prezzi]
             prices = [p["prezzo"] for p in prezzi]
+            urls = [p.get("url") for p in prezzi]
         else:
             price_html = '<div class="no-data">Nessun dato ancora</div>'
-            labels, prices = [], []
+            labels, prices, urls = [], [], []
 
-        chart_data[comp_id] = {"labels": labels, "prices": prices}
+        chart_data[comp_id] = {"labels": labels, "prices": prices, "urls": urls}
         cards_html.append(
             CARD_TEMPLATE.format(nome=nome, price_html=price_html, id=comp_id)
         )
