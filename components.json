@@ -7,7 +7,6 @@
       "prezzo_min_atteso": 250,
       "parole_chiave": ["7800x3d"],
       "fonti": {
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=AMD+Ryzen+7+7800X3D&LH_BIN=1&LH_ItemCondition=1000",
         "amazon": "https://www.amazon.it/s?k=AMD+Ryzen+7+7800X3D",
         "bpm_power": "AMD Ryzen 7 7800X3D"
       }
@@ -19,7 +18,6 @@
       "prezzo_min_atteso": 550,
       "parole_chiave": ["9070", "xt"],
       "fonti": {
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=AMD+Radeon+RX+9070+XT&LH_BIN=1&LH_ItemCondition=1000",
         "amazon": "https://www.amazon.it/s?k=AMD+Radeon+RX+9070+XT",
         "bpm_power": "Radeon RX 9070 XT"
       }
@@ -32,7 +30,6 @@
       "parole_chiave": ["liquid freezer", "360"],
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=Arctic+Liquid+Freezer+III+Pro+360",
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=Arctic+Liquid+Freezer+III+Pro+360&LH_BIN=1&LH_ItemCondition=1000",
         "bpm_power": "Arctic Liquid Freezer III Pro 360"
       }
     },
@@ -44,7 +41,6 @@
       "parole_chiave": ["peerless assassin"],
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=Thermalright+Peerless+Assassin+120+SE",
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=Thermalright+Peerless+Assassin+120+SE&LH_BIN=1&LH_ItemCondition=1000",
         "bpm_power": "Thermalright Peerless Assassin 120 SE"
       }
     },
@@ -56,7 +52,6 @@
       "parole_chiave": ["ak620"],
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=DeepCool+AK620",
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=DeepCool+AK620&LH_BIN=1&LH_ItemCondition=1000",
         "bpm_power": "DeepCool AK620"
       }
     },
@@ -68,7 +63,6 @@
       "parole_chiave": ["gm7", "1tb"],
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=Predator+GM7+1TB+SSD",
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=Predator+GM7+1TB+SSD&LH_BIN=1&LH_ItemCondition=1000",
         "bpm_power": "Predator GM7 1TB"
       }
     },
@@ -80,7 +74,6 @@
       "parole_chiave": ["tuf", "b850"],
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=Asus+TUF+Gaming+B850+Plus",
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=Asus+TUF+Gaming+B850+Plus&LH_BIN=1&LH_ItemCondition=1000",
         "bpm_power": "Asus TUF Gaming B850 Plus"
       }
     },
@@ -92,11 +85,10 @@
       "parole_chiave": ["mag a750"],
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=MSI+MAG+A750+alimentatore",
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=MSI+MAG+A750+alimentatore&LH_BIN=1&LH_ItemCondition=1000",
         "bpm_power": "MSI MAG A750"
       }
     },
-      {
+    {
       "id": "ram_ddr5_32gb",
       "nome": "RAM DDR5 32GB (2x16GB) 6000MHz",
       "soglia_prezzo": 130.0,
@@ -104,7 +96,6 @@
       "parole_chiave": ["ddr5", "32gb", "6000"],
       "fonti": {
         "amazon": "https://www.amazon.it/s?k=RAM+DDR5+32GB+2x16GB+6000MHz",
-        "ebay": "https://www.ebay.it/sch/i.html?_nkw=RAM+DDR5+32GB+2x16GB+6000MHz&LH_BIN=1&LH_ItemCondition=1000",
         "bpm_power": "RAM DDR5 32GB 6000MHz"
       }
     }
