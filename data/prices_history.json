@@ -90,6 +90,12 @@
         "prezzo": 329.29,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=AMD+Ryzen+7+7800X3D"
+      },
+      {
+        "data": "2026-08-09T23:02:04.873626+00:00",
+        "prezzo": 329.29,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=AMD+Ryzen+7+7800X3D"
       }
     ]
   },
@@ -327,6 +333,12 @@
         "prezzo": 193.47,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Asus+TUF+Gaming+B850+Plus"
+      },
+      {
+        "data": "2026-08-09T23:02:04.873626+00:00",
+        "prezzo": 193.47,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Asus+TUF+Gaming+B850+Plus"
       }
     ]
   },
@@ -430,6 +442,12 @@
         "prezzo": 98.71,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=MSI+MAG+A750"
+      },
+      {
+        "data": "2026-08-09T23:02:04.873626+00:00",
+        "prezzo": 69.99,
+        "fonte": "amazon",
+        "url": "https://www.amazon.it/MAG-A750BN-PCIE5-III-Alimentazione/dp/B096Y3WD5C/ref=sr_1_8?dib=eyJ2IjoiMSJ9.GBTwKdrej8o-W3-Pp2KtLqNl0MHv2gahTWWPJyCMK4QnFesuv3DXYeA6zmTqJ4byWmRPmoQaZjv91KJMRSDqw-RiTiiaiv1ZBvUKKoMMUsd1MrALEZKOc-KEXz4M8E06odgxaCVstuVfxJSukJEm1Ezr4s9MxYQpP2uRUVcxxrGaJAVnZytLZZ9vpBMZENIinIBGkbUWqEAKFKn8hHZH8vsCx7SBDGsdg41Rl82CQDY54CmpoN-e6JEfbH5VIbsNUhx6o1F8vXnZfJo4povEVTQlyjhSokj0XXnaET5Dqg8.FyTO96yQFC4ve51-xVWJLALDO5Ok9STfEoebi_4khJw&dib_tag=se&keywords=MSI+MAG+A750+alimentatore&qid=1786316636&sr=8-8"
       }
     ]
   },
@@ -533,6 +551,12 @@
         "prezzo": 435.21,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=RAM+DDR5+32GB+6000MHz"
+      },
+      {
+        "data": "2026-08-09T23:02:04.873626+00:00",
+        "prezzo": 417.99,
+        "fonte": "amazon",
+        "url": "https://www.amazon.it/Patriot-Memory-Viper-Venom-6000MHz/dp/B09XY6KX8P/ref=sr_1_14?dib=eyJ2IjoiMSJ9.72R8Suvd2XIzv4R9JumCZbiAEhLBoIQAj0lrZcanSubrBMn1eIp8drp8Sulb1UvNILLl0O_m0EcFGkonusLkBE-EvevYX5_pmsoJ0-fNeh6EJcmaYEi6wBPmwF_D5rjQPlO1go5q7GrBNxSSEQyYaUnyluwakmppl-_mRPrl8c7hzR6zBsysY92acJmH4h8_oJHYSIm4ED-y2JLFuxFM8RUeNY3CZ_81OEZ9cRio55v6T7jnt8IXQcW_scyF9x3rUawUUvwbPeX2alZ9gZ9POvtUUYsnP1QeMz2i9bUN-t8.IjTMLMC2jodbM28Pe_L9ISqoXn3bcfovia3LxjkPUvs&dib_tag=se&keywords=RAM+DDR5+32GB+2x16GB+6000MHz&qid=1786316654&sr=8-14"
       }
     ]
   },
@@ -583,6 +607,12 @@
       },
       {
         "data": "2026-08-09T21:05:08.603264+00:00",
+        "prezzo": 705.83,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Radeon+RX+9070+XT"
+      },
+      {
+        "data": "2026-08-09T23:02:04.873626+00:00",
         "prezzo": 705.83,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Radeon+RX+9070+XT"
@@ -653,6 +683,12 @@
       },
       {
         "data": "2026-08-09T21:05:08.603264+00:00",
+        "prezzo": 55.55,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=DeepCool+AK620"
+      },
+      {
+        "data": "2026-08-09T23:02:04.873626+00:00",
         "prezzo": 55.55,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=DeepCool+AK620"
