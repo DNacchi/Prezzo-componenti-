@@ -32,5 +32,11 @@
   "alimentatore": {
     "nome": "MSI MAG A750BN",
     "watt": 750
+  },
+  "case": {
+    "nome": "Corsair FRAME 4500X",
+    "radiatore_max_mm": 360,
+    "gpu_max_mm": 460,
+    "psu_max_mm": 250,
+    "dissipatore_aria_max_mm": 185
   }
-}
