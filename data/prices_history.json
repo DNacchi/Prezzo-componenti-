@@ -573,6 +573,12 @@
         "prezzo": 195.3,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Asus+TUF+Gaming+B850+Plus"
+      },
+      {
+        "data": "2026-08-13T22:24:17.874884+00:00",
+        "prezzo": 195.3,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Asus+TUF+Gaming+B850+Plus"
       }
     ]
   },
@@ -835,6 +841,12 @@
       },
       {
         "data": "2026-08-13T19:47:49.037426+00:00",
+        "prezzo": 87.93,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=MSI+MAG+A750"
+      },
+      {
+        "data": "2026-08-13T22:24:17.874884+00:00",
         "prezzo": 87.93,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=MSI+MAG+A750"
@@ -1252,6 +1264,12 @@
         "prezzo": 705.83,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Radeon+RX+9070+XT"
+      },
+      {
+        "data": "2026-08-13T22:24:17.874884+00:00",
+        "prezzo": 705.83,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Radeon+RX+9070+XT"
       }
     ]
   },
@@ -1499,6 +1517,12 @@
       },
       {
         "data": "2026-08-13T19:47:49.037426+00:00",
+        "prezzo": 55.4,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=DeepCool+AK620"
+      },
+      {
+        "data": "2026-08-13T22:24:17.874884+00:00",
         "prezzo": 55.4,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=DeepCool+AK620"
