@@ -132,6 +132,12 @@
         "prezzo": 329.29,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=AMD+Ryzen+7+7800X3D"
+      },
+      {
+        "data": "2026-08-13T09:43:32.270749+00:00",
+        "prezzo": 329.29,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=AMD+Ryzen+7+7800X3D"
       }
     ]
   },
@@ -519,6 +525,12 @@
         "prezzo": 195.3,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Asus+TUF+Gaming+B850+Plus"
+      },
+      {
+        "data": "2026-08-13T09:43:32.270749+00:00",
+        "prezzo": 195.3,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Asus+TUF+Gaming+B850+Plus"
       }
     ]
   },
@@ -760,6 +772,12 @@
         "prezzo": 87.93,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=MSI+MAG+A750"
+      },
+      {
+        "data": "2026-08-13T09:43:32.270749+00:00",
+        "prezzo": 87.93,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=MSI+MAG+A750"
       }
     ]
   },
@@ -959,6 +977,12 @@
         "prezzo": 435.21,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=RAM+DDR5+32GB+6000MHz"
+      },
+      {
+        "data": "2026-08-13T09:43:32.270749+00:00",
+        "prezzo": 435.21,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=RAM+DDR5+32GB+6000MHz"
       }
     ]
   },
@@ -1129,6 +1153,12 @@
       },
       {
         "data": "2026-08-13T05:23:30.488424+00:00",
+        "prezzo": 705.83,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Radeon+RX+9070+XT"
+      },
+      {
+        "data": "2026-08-13T09:43:32.270749+00:00",
         "prezzo": 705.83,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Radeon+RX+9070+XT"
@@ -1349,6 +1379,12 @@
       },
       {
         "data": "2026-08-13T05:23:30.488424+00:00",
+        "prezzo": 55.45,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=DeepCool+AK620"
+      },
+      {
+        "data": "2026-08-13T09:43:32.270749+00:00",
         "prezzo": 55.45,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=DeepCool+AK620"
