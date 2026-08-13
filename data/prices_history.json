@@ -567,6 +567,12 @@
         "prezzo": 195.3,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Asus+TUF+Gaming+B850+Plus"
+      },
+      {
+        "data": "2026-08-13T19:47:49.037426+00:00",
+        "prezzo": 195.3,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Asus+TUF+Gaming+B850+Plus"
       }
     ]
   },
@@ -826,6 +832,12 @@
         "prezzo": 87.93,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=MSI+MAG+A750"
+      },
+      {
+        "data": "2026-08-13T19:47:49.037426+00:00",
+        "prezzo": 87.93,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=MSI+MAG+A750"
       }
     ]
   },
@@ -1040,6 +1052,12 @@
       },
       {
         "data": "2026-08-13T16:11:54.518173+00:00",
+        "prezzo": 435.21,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=RAM+DDR5+32GB+6000MHz"
+      },
+      {
+        "data": "2026-08-13T19:47:49.037426+00:00",
         "prezzo": 435.21,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=RAM+DDR5+32GB+6000MHz"
@@ -1476,6 +1494,12 @@
       {
         "data": "2026-08-13T16:11:54.518173+00:00",
         "prezzo": 55.45,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=DeepCool+AK620"
+      },
+      {
+        "data": "2026-08-13T19:47:49.037426+00:00",
+        "prezzo": 55.4,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=DeepCool+AK620"
       }
