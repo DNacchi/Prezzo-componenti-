@@ -609,6 +609,12 @@
         "prezzo": 173.59,
         "fonte": "amazon",
         "url": "https://www.amazon.it/ASUS-B850-Plus-Alimentazione-Ethernet-Flashback/dp/B0DP5DQPRC/ref=sr_1_1?dib=eyJ2IjoiMSJ9._cO0bfKzHw5fO966ToPSOOiMAvJYPYTtWgqAmvEK6WDGzbIzSjzFiLboGEF514nVq8lLyFd_vCzxlX8HRwI6WCttW5s7_K9QKeVRDklnK-hUd2xcZgkpknCmBer_mae9DimCUk8_e5JlhahL2jKEvCi75VDdP-S-_hFviZwSgRaTIdzZGS4tpVXKkTIRCBt3IojqhWJZUPlE_cbmWkrFAO_84tJBSErG4aOiRwOqx94IBUSamVlpaunLVLWGNODTyf1wyLLCUj1Jow4kiZQWgW2p7O_hfan7e1NZhR-AblA.uXhaINw2EBVKP-YQgTK_wLTnpRs2lent04SedDIC9sA&dib_tag=se&keywords=Asus+TUF+Gaming+B850+Plus&qid=1786721250&sr=8-1"
+      },
+      {
+        "data": "2026-08-14T18:12:01.130906+00:00",
+        "prezzo": 195.3,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Asus+TUF+Gaming+B850+Plus"
       }
     ]
   },
@@ -904,6 +910,12 @@
         "prezzo": 76.21,
         "fonte": "amazon",
         "url": "https://www.amazon.it/MSI-PSU-MAG-A750BN-PCIE5/dp/B0CN1FZRBM/ref=sr_1_3?dib=eyJ2IjoiMSJ9.sqFFkc0mpL1k-74K0RRAs2dPfRYBSeJgaWLXLnK5f2Gq8A8F_Sr13j3dk_xyo0Z7nL-X0f-Zfpkj2HliSxh01gWcxa4XrR9BcsgJ_hvFgqUG_ZlTG2NfaWWiWiKjXJvtS5zcRQ8GnY7ajZzr7zYcZppZtKaxt3sLl5_ZidRHaXGMHaJhYf_xfjhd2lb3wHreu9xGpQFjgVnxpCM0_1Tplz4A0HnHdMxyOUJ9BLlayKXXbT44qAHaYF8-hce2DnlNnerrJ81JUUMRHgDAvR-v9pO9wcWevYkLGCE5zGLKPVE.RFlZO-gOsU3dw52deXsZbx8b1IYq41QZc-mACWnrJNg&dib_tag=se&keywords=MSI+MAG+A750+alimentatore&qid=1786721267&sr=8-3"
+      },
+      {
+        "data": "2026-08-14T18:12:01.130906+00:00",
+        "prezzo": 87.93,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=MSI+MAG+A750"
       }
     ]
   },
@@ -1151,6 +1163,12 @@
         "prezzo": 355.73,
         "fonte": "amazon",
         "url": "https://www.amazon.it/CORSAIR-VENGEANCE-6000MHz-CL38-44-44-96-Computer/dp/B0G5Q1XTKM/ref=sr_1_8?dib=eyJ2IjoiMSJ9.72R8Suvd2XIzv4R9JumCZZC79fYhFM2xT2moCD-2j8RI0vd55gaoMc07qPesbXVpIBfnWUm0M812Ik699ch3aLKhw66vUyB6h5Huo6a-1ZDdmWp640HI0sZ1ucpYxsKVt2sWxBLjlXYI5Fj4jflwHXXgAEYcX33pBM5fFQtmxSAmypNE4u3akst3RraCeJTKZdRNnT6jhx0-BjK2CBQHuolSNdkVSRYSUvoAlfuVxnujBwwVN9uOZMdoVb0AbfWRMdkLFb0Q5FhiFOBe_SCHdh7YfeVnCqZeWBxj8rahdn4.L4n7nQfo41L5DOL_iOsiLICd23bSI38FQAJ-tLNKMow&dib_tag=se&keywords=RAM+DDR5+32GB+2x16GB+6000MHz&qid=1786721284&sr=8-8"
+      },
+      {
+        "data": "2026-08-14T18:12:01.130906+00:00",
+        "prezzo": 435.21,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=RAM+DDR5+32GB+6000MHz"
       }
     ]
   },
@@ -1369,6 +1387,12 @@
       },
       {
         "data": "2026-08-14T15:25:52.498959+00:00",
+        "prezzo": 705.83,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Radeon+RX+9070+XT"
+      },
+      {
+        "data": "2026-08-14T18:12:01.130906+00:00",
         "prezzo": 705.83,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Radeon+RX+9070+XT"
@@ -1662,6 +1686,12 @@
       {
         "data": "2026-08-14T15:25:52.498959+00:00",
         "prezzo": 55.4,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=DeepCool+AK620"
+      },
+      {
+        "data": "2026-08-14T18:12:01.130906+00:00",
+        "prezzo": 55.38,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=DeepCool+AK620"
       }
