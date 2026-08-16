@@ -4,7 +4,7 @@
     {
       "check": "Socket CPU / scheda madre",
       "ok": true,
-      "dettaglio": "AMD Ryzen 7 7800X3D (AM5) su Asus TUF Gaming B850-Plus (AM5)"
+      "dettaglio": "AMD Ryzen 7 7800X3D (AM5) su Gigabyte B650 EAGLE AX (AM5)"
     },
     {
       "check": "Tipo RAM",
@@ -14,7 +14,7 @@
     {
       "check": "Dissipatore / socket CPU",
       "ok": true,
-      "dettaglio": "Arctic Liquid Freezer III Pro 360 supporta AM5, AM4, LGA1700, LGA1851"
+      "dettaglio": "Thermalright Phantom Spirit 120 SE ARGB supporta AM5, AM4, LGA1700, LGA1851"
     },
     {
       "check": "Potenza alimentatore",
@@ -22,14 +22,9 @@
       "dettaglio": "Consumo stimato ~480W (CPU 120W + GPU 260W + ~100W resto sistema) su alimentatore da 750W → margine 36% (sufficiente)"
     },
     {
-      "check": "Radiatore / spazio case",
-      "ok": true,
-      "dettaglio": "Radiatore da 360mm su Corsair FRAME 4500X (supporta fino a 360mm)"
-    },
-    {
       "check": "Spazio GPU nel case",
       "ok": true,
-      "dettaglio": "Corsair FRAME 4500X supporta GPU fino a 460mm. Verifica la lunghezza esatta del modello specifico di AMD Radeon RX 9070 XT che acquisti (varia tra i diversi produttori/varianti)."
+      "dettaglio": "Corsair FRAME 4500X supporta GPU fino a 460mm. Verifica la lunghezza esatta del modello specifico di Sapphire PULSE Radeon RX 9070 XT 16GB che acquisti (varia tra i diversi produttori/varianti)."
     },
     {
       "check": "SSD M.2",
