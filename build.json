@@ -6,31 +6,31 @@
     "tdp_watt": 120
   },
   "scheda_madre": {
-    "nome": "Asus TUF Gaming B850-Plus",
+    "nome": "Gigabyte B650 EAGLE AX",
     "socket": "AM5",
     "tipo_ram": "DDR5",
-    "supporta_pcie5_m2": true
+    "supporta_pcie5_m2": false
   },
   "gpu": {
-    "nome": "AMD Radeon RX 9070 XT",
+    "nome": "Sapphire PULSE Radeon RX 9070 XT 16GB",
     "tdp_watt": 260,
     "connettori_richiesti": "8-pin PCIe (o adattatore)"
   },
   "dissipatore": {
-    "nome": "Arctic Liquid Freezer III Pro 360",
+    "nome": "Thermalright Phantom Spirit 120 SE ARGB",
     "socket_supportati": ["AM5", "AM4", "LGA1700", "LGA1851"],
-    "radiatore_mm": 360
+    "radiatore_mm": null
   },
   "ssd": {
     "nome": "Acer Predator GM7 1TB",
-    "interfaccia": "M.2 NVMe PCIe4/5"
+    "interfaccia": "M.2 NVMe PCIe4"
   },
   "ram": {
-    "nome": "RAM DDR5 32GB (2x16GB) 6000MHz",
+    "nome": "Corsair Vengeance 32GB (2x16GB) DDR5-6000 CL36",
     "tipo": "DDR5"
   },
   "alimentatore": {
-    "nome": "MSI MAG A750BN",
+    "nome": "MSI MAG A750GL PCIE5",
     "watt": 750
   },
   "case": {
