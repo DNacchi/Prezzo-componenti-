@@ -7,52 +7,57 @@
       "prezzo_min_atteso": 250,
       "parole_chiave": ["7800x3d"],
       "fonti": {
-        "amazon": "https://www.amazon.it/s?k=AMD+Ryzen+7+7800X3D",
         "bpm_power": "AMD Ryzen 7 7800X3D"
       }
     },
     {
-      "id": "rx_9070_xt",
-      "nome": "AMD Radeon RX 9070 XT",
+      "id": "mobo_gigabyte_b650_eagle_ax",
+      "nome": "Gigabyte B650 EAGLE AX",
+      "soglia_prezzo": 190.0,
+      "prezzo_min_atteso": 130,
+      "parole_chiave": ["b650", "eagle"],
+      "fonti": {
+        "bpm_power": "Gigabyte B650 EAGLE AX"
+      }
+    },
+    {
+      "id": "gpu_sapphire_pulse_rx9070xt",
+      "nome": "Sapphire PULSE Radeon RX 9070 XT 16GB",
       "soglia_prezzo": 700.0,
       "prezzo_min_atteso": 550,
-      "parole_chiave": ["9070", "xt"],
+      "parole_chiave": ["pulse", "9070", "xt"],
       "fonti": {
-        "amazon": "https://www.amazon.it/s?k=AMD+Radeon+RX+9070+XT",
-        "bpm_power": "Radeon RX 9070 XT"
+        "bpm_power": "Sapphire PULSE Radeon RX 9070 XT"
       }
     },
     {
-      "id": "arctic_lf3_pro_360",
-      "nome": "Arctic Liquid Freezer III Pro 360 (AIO)",
-      "soglia_prezzo": 110.0,
-      "prezzo_min_atteso": 90,
-      "parole_chiave": ["liquid freezer", "360"],
+      "id": "psu_msi_mag_a750gl",
+      "nome": "MSI MAG A750GL PCIE5 750W",
+      "soglia_prezzo": 90.0,
+      "prezzo_min_atteso": 60,
+      "parole_chiave": ["a750gl"],
       "fonti": {
-        "amazon": "https://www.amazon.it/s?k=Arctic+Liquid+Freezer+III+Pro+360",
-        "bpm_power": "Arctic Liquid Freezer III Pro 360"
+        "bpm_power": "MSI MAG A750GL PCIE5"
       }
     },
     {
-      "id": "thermalright_paa120se",
-      "nome": "Thermalright Peerless Assassin 120 SE (aria)",
+      "id": "ram_corsair_vengeance_32gb_6000cl36",
+      "nome": "Corsair Vengeance 32GB (2x16GB) DDR5-6000 CL36",
+      "soglia_prezzo": 130.0,
+      "prezzo_min_atteso": 70,
+      "parole_chiave": ["vengeance", "6000"],
+      "fonti": {
+        "bpm_power": "Corsair Vengeance 32GB DDR5-6000 CL36"
+      }
+    },
+    {
+      "id": "cooler_thermalright_phantom_spirit_120se",
+      "nome": "Thermalright Phantom Spirit 120 SE ARGB",
       "soglia_prezzo": 45.0,
       "prezzo_min_atteso": 25,
-      "parole_chiave": ["peerless assassin"],
+      "parole_chiave": ["phantom spirit"],
       "fonti": {
-        "amazon": "https://www.amazon.it/s?k=Thermalright+Peerless+Assassin+120+SE",
-        "bpm_power": "Thermalright Peerless Assassin 120 SE"
-      }
-    },
-    {
-      "id": "deepcool_ak620",
-      "nome": "DeepCool AK620 (aria)",
-      "soglia_prezzo": 60.0,
-      "prezzo_min_atteso": 35,
-      "parole_chiave": ["ak620"],
-      "fonti": {
-        "amazon": "https://www.amazon.it/s?k=DeepCool+AK620",
-        "bpm_power": "DeepCool AK620"
+        "bpm_power": "Thermalright Phantom Spirit 120 SE"
       }
     },
     {
@@ -62,41 +67,7 @@
       "prezzo_min_atteso": 45,
       "parole_chiave": ["gm7", "1tb"],
       "fonti": {
-        "amazon": "https://www.amazon.it/s?k=Predator+GM7+1TB+SSD",
         "bpm_power": "Predator GM7 1TB"
-      }
-    },
-    {
-      "id": "asus_tuf_b850_plus",
-      "nome": "Asus TUF Gaming B850-Plus",
-      "soglia_prezzo": 190.0,
-      "prezzo_min_atteso": 150,
-      "parole_chiave": ["tuf", "b850"],
-      "fonti": {
-        "amazon": "https://www.amazon.it/s?k=Asus+TUF+Gaming+B850+Plus",
-        "bpm_power": "Asus TUF Gaming B850 Plus"
-      }
-    },
-    {
-      "id": "msi_mag_a750",
-      "nome": "MSI MAG A750BN (750W)",
-      "soglia_prezzo": 75.0,
-      "prezzo_min_atteso": 60,
-      "parole_chiave": ["mag a750"],
-      "fonti": {
-        "amazon": "https://www.amazon.it/s?k=MSI+MAG+A750+alimentatore",
-        "bpm_power": "MSI MAG A750"
-      }
-    },
-    {
-      "id": "ram_ddr5_32gb",
-      "nome": "RAM DDR5 32GB (2x16GB) 6000MHz",
-      "soglia_prezzo": 130.0,
-      "prezzo_min_atteso": 70,
-      "parole_chiave": ["ddr5", "32gb", "6000"],
-      "fonti": {
-        "amazon": "https://www.amazon.it/s?k=RAM+DDR5+32GB+2x16GB+6000MHz",
-        "bpm_power": "RAM DDR5 32GB 6000MHz"
       }
     }
   ]
