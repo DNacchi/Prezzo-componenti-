@@ -540,6 +540,12 @@
         "prezzo": 139.3,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Gigabyte+B650+EAGLE+AX"
+      },
+      {
+        "data": "2026-08-18T05:05:04.599923+00:00",
+        "prezzo": 139.3,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Gigabyte+B650+EAGLE+AX"
       }
     ]
   },
@@ -704,6 +710,12 @@
       },
       {
         "data": "2026-08-18T03:09:48.043146+00:00",
+        "prezzo": 789.57,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Sapphire+PULSE+Radeon+RX+9070+XT"
+      },
+      {
+        "data": "2026-08-18T05:05:04.599923+00:00",
         "prezzo": 789.57,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Sapphire+PULSE+Radeon+RX+9070+XT"
