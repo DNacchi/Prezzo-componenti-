@@ -732,6 +732,12 @@
         "prezzo": 138.31,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Gigabyte+B650+EAGLE+AX"
+      },
+      {
+        "data": "2026-08-20T10:57:49.360841+00:00",
+        "prezzo": 138.31,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Gigabyte+B650+EAGLE+AX"
       }
     ]
   },
@@ -1049,6 +1055,12 @@
         "prezzo": 795.65,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Sapphire+PULSE+Radeon+RX+9070+XT"
+      },
+      {
+        "data": "2026-08-20T10:57:49.360841+00:00",
+        "prezzo": 795.65,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Sapphire+PULSE+Radeon+RX+9070+XT"
       }
     ]
   },
@@ -1357,6 +1369,12 @@
       },
       {
         "data": "2026-08-20T09:18:16.004337+00:00",
+        "prezzo": 114.89,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=MSI+MAG+A750GL+PCIE5"
+      },
+      {
+        "data": "2026-08-20T10:57:49.360841+00:00",
         "prezzo": 114.89,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=MSI+MAG+A750GL+PCIE5"
