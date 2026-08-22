@@ -924,6 +924,12 @@
         "prezzo": 138.31,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Gigabyte+B650+EAGLE+AX"
+      },
+      {
+        "data": "2026-08-22T06:02:57.094758+00:00",
+        "prezzo": 138.31,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Gigabyte+B650+EAGLE+AX"
       }
     ]
   },
@@ -1391,6 +1397,12 @@
         "prezzo": 801.72,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Sapphire+PULSE+Radeon+RX+9070+XT"
+      },
+      {
+        "data": "2026-08-22T06:02:57.094758+00:00",
+        "prezzo": 801.72,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Sapphire+PULSE+Radeon+RX+9070+XT"
       }
     ]
   },
@@ -1852,6 +1864,12 @@
         "prezzo": 124.38,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=MSI+MAG+A750GL+PCIE5"
+      },
+      {
+        "data": "2026-08-22T06:02:57.094758+00:00",
+        "prezzo": 124.38,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=MSI+MAG+A750GL+PCIE5"
       }
     ]
   },
@@ -2298,6 +2316,12 @@
       },
       {
         "data": "2026-08-22T05:01:00.880675+00:00",
+        "prezzo": 875.19,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Corsair+Vengeance+32GB+DDR5-6000+CL36"
+      },
+      {
+        "data": "2026-08-22T06:02:57.094758+00:00",
         "prezzo": 875.19,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Corsair+Vengeance+32GB+DDR5-6000+CL36"
