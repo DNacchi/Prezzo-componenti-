@@ -11,16 +11,6 @@
       }
     },
     {
-      "id": "mobo_gigabyte_b650_eagle_ax",
-      "nome": "Gigabyte B650 EAGLE AX",
-      "soglia_prezzo": 190.0,
-      "prezzo_min_atteso": 130,
-      "parole_chiave": ["b650", "eagle"],
-      "fonti": {
-        "bpm_power": "Gigabyte B650 EAGLE AX"
-      }
-    },
-    {
       "id": "gpu_sapphire_pulse_rx9070xt",
       "nome": "Sapphire PULSE Radeon RX 9070 XT 16GB",
       "soglia_prezzo": 700.0,
@@ -28,16 +18,6 @@
       "parole_chiave": ["pulse", "9070", "xt"],
       "fonti": {
         "bpm_power": "Sapphire PULSE Radeon RX 9070 XT"
-      }
-    },
-    {
-      "id": "psu_msi_mag_a750gl",
-      "nome": "MSI MAG A750GL PCIE5 750W",
-      "soglia_prezzo": 90.0,
-      "prezzo_min_atteso": 60,
-      "parole_chiave": ["a750gl"],
-      "fonti": {
-        "bpm_power": "MSI MAG A750GL PCIE5"
       }
     },
     {
@@ -58,16 +38,6 @@
       "parole_chiave": ["phantom spirit"],
       "fonti": {
         "bpm_power": "Thermalright Phantom Spirit 120 SE"
-      }
-    },
-    {
-      "id": "ssd_predator_gm7_1tb",
-      "nome": "Acer Predator GM7 1TB",
-      "soglia_prezzo": 70.0,
-      "prezzo_min_atteso": 45,
-      "parole_chiave": ["gm7", "1tb"],
-      "fonti": {
-        "bpm_power": "Predator GM7 1TB"
       }
     }
   ]
