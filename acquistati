@@ -1,0 +1,24 @@
+{
+  "acquistati": [
+    {
+      "id": "ssd_predator_gm7_1tb",
+      "nome": "Acer Predator GM7 1TB",
+      "prezzo": 160.0
+    },
+    {
+      "id": "psu_msi_mag_a750gl",
+      "nome": "MSI MAG A750GL PCIE5 750W",
+      "prezzo": 85.38
+    },
+    {
+      "id": "mobo_gigabyte_b650_eagle_ax",
+      "nome": "Gigabyte B650 EAGLE AX",
+      "prezzo": 134.41
+    },
+    {
+      "id": "case_corsair_frame_4500x",
+      "nome": "Corsair FRAME 4500X",
+      "prezzo": 80.0
+    }
+  ]
+}
