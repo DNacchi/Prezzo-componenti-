@@ -1583,6 +1583,12 @@
         "prezzo": 843.45,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Sapphire+PULSE+Radeon+RX+9070+XT"
+      },
+      {
+        "data": "2026-08-29T15:02:11.465877+00:00",
+        "prezzo": 843.45,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Sapphire+PULSE+Radeon+RX+9070+XT"
       }
     ]
   },
@@ -2653,6 +2659,12 @@
       },
       {
         "data": "2026-08-29T14:32:04.974340+00:00",
+        "prezzo": 875.19,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Corsair+Vengeance+32GB+DDR5-6000+CL36"
+      },
+      {
+        "data": "2026-08-29T15:02:11.465877+00:00",
         "prezzo": 875.19,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Corsair+Vengeance+32GB+DDR5-6000+CL36"
