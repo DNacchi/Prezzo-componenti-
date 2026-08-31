@@ -600,6 +600,12 @@
         "prezzo": 344.88,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=AMD+Ryzen+7+7800X3D"
+      },
+      {
+        "data": "2026-08-31T16:02:18.600756+00:00",
+        "prezzo": 343.34,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=AMD+Ryzen+7+7800X3D"
       }
     ]
   },
@@ -2069,6 +2075,12 @@
         "prezzo": 832.1,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Sapphire+PULSE+Radeon+RX+9070+XT"
+      },
+      {
+        "data": "2026-08-31T16:02:18.600756+00:00",
+        "prezzo": 832.1,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Sapphire+PULSE+Radeon+RX+9070+XT"
       }
     ]
   },
@@ -3517,6 +3529,12 @@
       },
       {
         "data": "2026-08-31T15:02:26.203509+00:00",
+        "prezzo": 875.19,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Corsair+Vengeance+32GB+DDR5-6000+CL36"
+      },
+      {
+        "data": "2026-08-31T16:02:18.600756+00:00",
         "prezzo": 875.19,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Corsair+Vengeance+32GB+DDR5-6000+CL36"
