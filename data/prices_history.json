@@ -690,6 +690,12 @@
         "prezzo": 337.51,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=AMD+Ryzen+7+7800X3D"
+      },
+      {
+        "data": "2026-09-02T12:03:39.043506+00:00",
+        "prezzo": 337.51,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=AMD+Ryzen+7+7800X3D"
       }
     ]
   },
@@ -2660,6 +2666,12 @@
       },
       {
         "data": "2026-09-02T11:35:11.790606+00:00",
+        "prezzo": 838.18,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Sapphire+PULSE+Radeon+RX+9070+XT"
+      },
+      {
+        "data": "2026-09-02T12:03:39.043506+00:00",
         "prezzo": 838.18,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Sapphire+PULSE+Radeon+RX+9070+XT"
