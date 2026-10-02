@@ -4301,6 +4301,12 @@
         "prezzo": 911.08,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Sapphire+PULSE+Radeon+RX+9070+XT"
+      },
+      {
+        "data": "2026-10-02T01:01:05.326547+00:00",
+        "prezzo": 923.24,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Sapphire+PULSE+Radeon+RX+9070+XT"
       }
     ]
   },
