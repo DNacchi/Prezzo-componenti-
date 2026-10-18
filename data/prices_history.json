@@ -1254,6 +1254,12 @@
         "prezzo": 380.03,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=AMD+Ryzen+7+7800X3D"
+      },
+      {
+        "data": "2026-10-18T23:46:40.229303+00:00",
+        "prezzo": 380.03,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=AMD+Ryzen+7+7800X3D"
       }
     ]
   },
@@ -6919,6 +6925,12 @@
       },
       {
         "data": "2026-10-18T21:37:28.198008+00:00",
+        "prezzo": 995.84,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Corsair+Vengeance+32GB+DDR5-6000+CL36"
+      },
+      {
+        "data": "2026-10-18T23:46:40.229303+00:00",
         "prezzo": 995.84,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Corsair+Vengeance+32GB+DDR5-6000+CL36"
