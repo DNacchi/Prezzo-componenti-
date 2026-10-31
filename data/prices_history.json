@@ -7426,6 +7426,12 @@
         "prezzo": 625.62,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Corsair+Vengeance+32GB+DDR5-6000+CL36"
+      },
+      {
+        "data": "2026-10-31T20:09:51.168279+00:00",
+        "prezzo": 625.62,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Corsair+Vengeance+32GB+DDR5-6000+CL36"
       }
     ]
   },
@@ -7434,6 +7440,12 @@
     "prezzi": [
       {
         "data": "2026-10-31T16:28:23.652543+00:00",
+        "prezzo": 42.5,
+        "fonte": "bpm_power",
+        "url": "https://www.bpm-power.com/it/ricerca?k=Thermalright+Phantom+Spirit+120+SE"
+      },
+      {
+        "data": "2026-10-31T20:09:51.168279+00:00",
         "prezzo": 42.5,
         "fonte": "bpm_power",
         "url": "https://www.bpm-power.com/it/ricerca?k=Thermalright+Phantom+Spirit+120+SE"
